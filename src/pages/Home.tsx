@@ -178,10 +178,10 @@ export const Home: React.FC = () => {
       </a>
 
       <main className="reference-main">
-        <section className="reference-hero min-h-screen flex items-center justify-between px-12 md:px-24">
-          <div className="reference-hero-left flex flex-col items-start gap-2 z-10">
-            <p className="font-roboto text-purple-300/60 text-lg md:text-2xl uppercase tracking-[0.2em]">Hello! I&apos;m</p>
-            <h1 className="font-anton text-[10vw] md:text-[8.5rem] font-normal leading-[0.85] tracking-wide text-white uppercase mb-8 drop-shadow-[0_10px_30px_rgba(0,0,0,0.5)]">
+        <section className="reference-hero min-h-screen flex items-center justify-between px-6 md:px-24 py-20 md:py-0">
+          <div className="reference-hero-left flex flex-col items-start gap-2 z-10 w-full">
+            <p className="font-roboto text-purple-300/60 text-sm md:text-2xl uppercase tracking-[0.2em]">Hello! I&apos;m</p>
+            <h1 className="font-anton text-[13vw] md:text-[8.5rem] font-normal leading-[0.85] tracking-wide text-white uppercase mb-8 drop-shadow-[0_10px_30px_rgba(0,0,0,0.5)]">
               {config.developer.fullName.split(" ")[0].toUpperCase()}
               <br />
               {config.developer.fullName
@@ -191,12 +191,12 @@ export const Home: React.FC = () => {
                 .toUpperCase()}
             </h1>
 
-            <div className="flex flex-col items-start gap-1">
-              <p className="font-roboto text-purple-300/60 text-lg md:text-xl uppercase tracking-[0.2em]">An</p>
-              <h2 className="font-anton text-[6.5vw] md:text-[5.5rem] font-normal leading-[0.85] tracking-wide text-[#c084fc] uppercase drop-shadow-[0_0_20px_rgba(192,132,252,0.4)]">
+            <div className="flex flex-col items-start gap-1 w-full">
+              <p className="font-roboto text-purple-300/60 text-xs md:text-xl uppercase tracking-[0.2em]">An</p>
+              <h2 className="font-anton text-[8.5vw] md:text-[5.5rem] font-normal leading-[0.85] tracking-wide text-[#c084fc] uppercase drop-shadow-[0_0_20px_rgba(192,132,252,0.4)]">
                 AI ENGINEER
               </h2>
-              <h3 className="font-anton text-[6.3vw] md:text-[5.2rem] font-normal leading-[0.85] tracking-wide text-white uppercase">
+              <h3 className="font-anton text-[8.2vw] md:text-[5.2rem] font-normal leading-[0.85] tracking-wide text-white uppercase">
                 FULL-STACK DEVELOPER
               </h3>
             </div>

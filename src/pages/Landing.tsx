@@ -268,39 +268,44 @@ const Landing: React.FC = () => {
       ctx.textAlign = "center";
       ctx.textBaseline = "middle";
       
-      // Title
+      const isMobile = W < 768;
+
+      // Title - scale down nicely on mobile
       ctx.fillStyle = "rgba(255,255,255,0.9)";
-      const titleSize = Math.max(32, Math.min(W * 0.05, 64)); 
+      const titleSize = isMobile ? Math.max(20, Math.min(W * 0.06, 32)) : Math.max(32, Math.min(W * 0.05, 64)); 
       ctx.font = `800 ${titleSize}px Geist, sans-serif`;
       ctx.fillText("This is a tearable page.", W / 2, H / 2 - 20 + dropY);
       
-      // Subtitle
-      const subSize = Math.max(16, Math.min(W * 0.02, 19));
+      // Subtitle - scale down nicely on mobile
+      const subSize = isMobile ? Math.max(12, Math.min(W * 0.035, 14)) : Math.max(16, Math.min(W * 0.02, 19));
       ctx.fillStyle = "rgba(255,255,255,0.6)";
       ctx.font = `500 ${subSize}px Geist, sans-serif`;
-      ctx.fillText("To know about Nishkarsh Sharma, tear this.", W / 2, H / 2 + 30 + dropY);
-
-      // Instructions
+      ctx.fillText("To know about Nishkarsh Sharma, tear this.", W / 2, H / 2 + 25 + dropY);
+ 
+      // Instructions - use short mobile-friendly copy
       ctx.fillStyle = "rgba(255,255,255,0.35)";
-      ctx.font = `500 11px Geist, sans-serif`;
+      ctx.font = `500 ${isMobile ? 9 : 11}px Geist, sans-serif`;
       ctx.letterSpacing = "2px";
-      ctx.fillText("LEFT-DRAG TO PULL  ·  RIGHT-DRAG TO CUT  ·  TEAR THE PAGE TO ENTER", W / 2, H - 40 + dropY);
+      const instructionText = isMobile 
+        ? "DRAG TO TEAR THE PAGE TO ENTER" 
+        : "LEFT-DRAG TO PULL  ·  RIGHT-DRAG TO CUT  ·  TEAR THE PAGE TO ENTER";
+      ctx.fillText(instructionText, W / 2, H - 40 + dropY);
       ctx.letterSpacing = "0px"; // reset
-
+ 
       // Reset composite operation so the next frame's cloth draws normally
       ctx.globalCompositeOperation = "source-over";
-
+ 
       // Progress bar (fills as you tear)
       const ratio = cloth.torn();
       if (barRef.current && !exiting) {
         barRef.current.style.width = `${Math.min(ratio / 0.45, 1) * 100}%`;
       }
-
+ 
       // Check if torn enough (45%) to automatically trigger exit physics
       if (ratio >= 0.45 && !exiting) {
         triggerExit();
       }
-
+ 
       raf = requestAnimationFrame(loop);
     };
     raf = requestAnimationFrame(loop);
