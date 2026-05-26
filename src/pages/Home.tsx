@@ -2,7 +2,8 @@ import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Cursor from "../components/Cursor";
-import AboutAndSkills from "../components/AboutAndSkills";
+import About from "../components/About";
+import Skills from "../components/Skills";
 import Experience from "../components/Experience";
 import WorkHorizontal from "../components/WorkHorizontal";
 import Contact from "../components/Contact";
@@ -73,7 +74,7 @@ export const Home: React.FC = () => {
 
       // 2. Main title elements rise up with scale and blur fade
       entryTl.fromTo(
-        ".hero-scene-1 > *",
+        ".reference-hero-left > *",
         { y: 80, opacity: 0, filter: "blur(15px)", scale: 0.96 },
         {
           y: 0,
@@ -95,46 +96,18 @@ export const Home: React.FC = () => {
         0.8
       );
 
-      // 4. Cinematic Scroll Trigger: Transition from Scene 1 to Scene 2
-      const scrollTl = gsap.timeline({
-        scrollTrigger: {
-          trigger: ".reference-hero",
-          start: "top top",
-          end: "+=200%", // Scroll distance of pinning duration
-          pin: true,
-          scrub: 1,
-          anticipatePin: 1,
-        }
-      });
-
-      // Stage 1: Scale down and fade out Scene 1, shift up
-      scrollTl.to(".hero-scene-1", {
-        scale: 0.5,
-        opacity: 0,
-        y: "-25vh",
-        filter: "blur(10px)",
-        ease: "power2.inOut",
-        duration: 1
-      }, 0);
-
-      // Stage 2: Slide up and fade in Scene 2 (AI Dev + Full Stack)
-      scrollTl.fromTo(".hero-scene-2",
-        { opacity: 0, y: "25vh", scale: 0.9, filter: "blur(10px)" },
-        { opacity: 1, y: "0vh", scale: 1, filter: "blur(0px)", ease: "power2.out", duration: 1 },
-        0.3 // Overlaps with Stage 1
-      );
-
-      // Stage 3: Fade out Scene 2 at the very end of scrolling
-      scrollTl.to(".hero-scene-2", {
-        opacity: 0,
-        y: "-10vh",
-        filter: "blur(10px)",
-        ease: "power1.in",
-        duration: 0.5
-      }, 1.5);
-
-      // Sync backdrop opacity during this scroll sequence
-      scrollTl.to(".reference-backdrop", { opacity: 0.45, duration: 1.5 }, 0);
+      gsap
+        .timeline({
+          scrollTrigger: {
+            trigger: ".reference-hero",
+            start: "top top",
+            end: "bottom top",
+            scrub: 1,
+          },
+        })
+        .to(".reference-hero-left", { y: "20%", opacity: 0.18 }, 0)
+        .to(".reference-hero-right", { y: "20%", opacity: 0.18 }, 0)
+        .to(".reference-backdrop", { opacity: 0.45 }, 0);
 
       gsap.to(".reference-social-rail, .reference-resume-rail", {
         scrollTrigger: {
@@ -195,52 +168,37 @@ export const Home: React.FC = () => {
       </a>
 
       <main className="reference-main">
-        <section 
-          className="reference-hero" 
-          style={{ 
-            display: "flex", 
-            flexDirection: "column", 
-            alignItems: "center", 
-            justifyContent: "center", 
-            minHeight: "100vh", 
-            position: "relative", 
-            overflow: "hidden", 
-            padding: 0 
-          }}
-        >
-          {/* Scene 1: Hello I'm Nishkarsh Sharma */}
-          <div className="hero-scene-1 absolute flex flex-col items-center justify-center text-center z-10 w-full px-6">
-            <p className="font-roboto text-sm md:text-lg text-[#c084fc] font-bold tracking-[0.25em] uppercase mb-4">
-              Hello! I'm
-            </p>
-            <h1 className="font-anton text-[7vw] md:text-[8vw] leading-none tracking-wider text-white uppercase">
-              {config.developer.fullName.split(" ")[0]}
+        <section className="reference-hero min-h-screen flex items-center justify-between px-12 md:px-24">
+          <div className="reference-hero-left flex flex-col items-start gap-2 z-10">
+            <p className="font-roboto text-purple-300/60 text-lg md:text-2xl uppercase tracking-[0.2em]">Hello! I&apos;m</p>
+            <h1 className="font-anton text-[10vw] md:text-[8.5rem] font-normal leading-[0.85] tracking-wide text-white uppercase mb-8 drop-shadow-[0_10px_30px_rgba(0,0,0,0.5)]">
+              {config.developer.fullName.split(" ")[0].toUpperCase()}
               <br />
-              <span className="text-white/90">{config.developer.fullName.split(" ").slice(1).join(" ")}</span>
+              {config.developer.fullName
+                .split(" ")
+                .slice(1)
+                .join(" ")
+                .toUpperCase()}
             </h1>
+
+            <div className="flex flex-col items-start gap-1">
+              <p className="font-roboto text-purple-300/60 text-lg md:text-xl uppercase tracking-[0.2em]">An</p>
+              <h2 className="font-anton text-[6.5vw] md:text-[5.5rem] font-normal leading-[0.85] tracking-wide text-[#c084fc] uppercase drop-shadow-[0_0_20px_rgba(192,132,252,0.4)]">
+                AI ENGINEER
+              </h2>
+              <h3 className="font-anton text-[6.3vw] md:text-[5.2rem] font-normal leading-[0.85] tracking-wide text-white uppercase">
+                FULL-STACK DEVELOPER
+              </h3>
+            </div>
           </div>
 
-          {/* Scene 2: AI Engineer + Full Stack Developer */}
-          <div 
-            className="hero-scene-2 absolute flex flex-col items-center justify-center text-center z-10 w-full px-6 opacity-0"
-            style={{ pointerEvents: "none" }}
-          >
-            <p className="font-roboto text-sm md:text-lg text-white/50 tracking-[0.2em] uppercase mb-4">
-              An
-            </p>
-            <h2 
-              className="font-anton text-[6.5vw] md:text-[7.5vw] leading-none tracking-wider text-[#c084fc] uppercase"
-              style={{ filter: "drop-shadow(0 0 15px rgba(192, 132, 252, 0.4))" }}
-            >
-              AI Engineer
-            </h2>
-            <h3 className="font-anton text-[5vw] md:text-[6vw] leading-none tracking-wider text-white uppercase mt-4">
-              Full-Stack Developer
-            </h3>
+          <div className="reference-hero-right">
+            {/* Right side empty as requested for future additions */}
           </div>
         </section>
 
-        <AboutAndSkills />
+        <About />
+        <Skills />
         <Experience />
         <WorkHorizontal />
         <TechStack />

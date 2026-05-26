@@ -26,38 +26,38 @@ export const WorkHorizontal: React.FC = () => {
         return -(workFlex.scrollWidth - parentWidth);
       };
 
-      // Unified Timeline sharing a single ScrollTrigger to prevent double-spacer conflicts
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: workRef.current,
-          start: "top top",
-          pin: true,
-          scrub: 1,
-          end: () => `+=${Math.abs(getScrollAmount()) + 200}`,
-          invalidateOnRefresh: true,
-          anticipatePin: 1,
-        },
-      });
-
-      // 1. Stage 1: Staggered card fade-up as pinning commences
-      tl.fromTo(
+      // Smooth stagger entry animation as the section enters the screen
+      gsap.fromTo(
         boxes,
-        { opacity: 0, y: 80, filter: "blur(4px)" },
+        { opacity: 0, y: 100, filter: "blur(5px)" },
         {
           opacity: 1,
           y: 0,
           filter: "blur(0px)",
-          stagger: 0.1,
-          duration: 0.6,
-          ease: "power2.out",
+          stagger: 0.15,
+          duration: 1.2,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: ".work-section-horizontal",
+            start: "top 85%",
+            once: true,
+          },
         }
       );
 
-      // 2. Stage 2: Horizontal scroll scrub
-      tl.to(workFlex, {
+      // Horizontal pinning animation
+      gsap.to(workFlex, {
         x: getScrollAmount,
         ease: "none",
-        duration: 2, // Smooth scrub scroll duration
+        scrollTrigger: {
+          trigger: ".work-section-horizontal",
+          start: "top top",
+          pin: true,
+          scrub: 1,
+          end: () => `+=${Math.abs(getScrollAmount())}`,
+          invalidateOnRefresh: true,
+          anticipatePin: 1, // Reduces any pinning lag or jumping behavior
+        },
       });
 
       // Apply tilt to each card inner content
@@ -65,45 +65,22 @@ export const WorkHorizontal: React.FC = () => {
       cards.forEach(card => applyCardTilt(card));
     });
 
-    // Force ScrollTrigger to refresh after 500ms to align correctly with Lenis smooth scroll
-    const refreshTimeout = setTimeout(() => {
-      ScrollTrigger.refresh();
-    }, 500);
-
-    return () => {
-      ctx.revert();
-      clearTimeout(refreshTimeout);
-    };
+    return () => ctx.revert();
   }, []);
 
   const displayProjects = config.projects;
 
   return (
-    <div className="work-section-horizontal" id="work" ref={workRef} style={{ position: "relative", height: "100vh", overflow: "hidden", backgroundColor: "#09060d" }}>
-      {/* Pinned Masking Sidebar so cards slide elegantly *behind* the text */}
-      <div 
-        style={{ 
-          position: "absolute", 
-          top: 0, 
-          left: 0, 
-          height: "100vh", 
-          width: "25vw", 
-          zIndex: 20, 
-          display: "flex",
-          alignItems: "center",
-          paddingLeft: "5vw",
-          background: "linear-gradient(90deg, #09060d 80%, rgba(9,6,13,0) 100%)",
-          pointerEvents: "none"
-        }}
-      >
-        <h2 style={{ fontSize: "5rem", fontWeight: 700, lineHeight: 1.1, margin: 0, letterSpacing: "0.05em", fontFamily: "var(--font-anton)" }}>
+    <div className="work-section-horizontal career-section" id="work" ref={workRef} style={{ position: "relative", height: "100vh", overflow: "hidden" }}>
+      <div style={{ position: "absolute", top: "15vh", left: "5vw", zIndex: 10, width: "20vw" }}>
+        <h2 style={{ fontSize: "5rem", fontWeight: 700, lineHeight: 1.1, margin: 0, letterSpacing: "0.05em" }}>
           MY
           <br />
           <span style={{ color: "#c697ff" }}>WORK</span>
         </h2>
       </div>
       
-      <div style={{ marginLeft: "25vw", width: "75vw", height: "100%", overflow: "hidden", position: "relative", zIndex: 10 }}>
+      <div style={{ marginLeft: "25vw", width: "75vw", height: "100%", overflow: "hidden" }}>
         <div className="work-flex-alt" style={{ paddingLeft: "2rem", paddingRight: "5vw" }}>
         {displayProjects.map((project, index) => {
           const num = (index + 1).toString().padStart(2, "0");
@@ -127,23 +104,13 @@ export const WorkHorizontal: React.FC = () => {
                     </div>
                   </div>
                   <div className="work-img-wrapper" style={{ borderRadius: "12px", overflow: "hidden" }}>
-                    <img 
-                      src={project.image} 
-                      alt={project.title} 
-                      loading="lazy" 
-                      onLoad={() => ScrollTrigger.refresh()}
-                    />
+                    <img src={project.image} alt={project.title} loading="lazy" />
                   </div>
                 </div>
               ) : (
                 <div className="work-content-odd glass-card" style={{ padding: "20px" }}>
                   <div className="work-img-wrapper" style={{ borderRadius: "12px", overflow: "hidden" }}>
-                    <img 
-                      src={project.image} 
-                      alt={project.title} 
-                      loading="lazy" 
-                      onLoad={() => ScrollTrigger.refresh()}
-                    />
+                    <img src={project.image} alt={project.title} loading="lazy" />
                   </div>
                   <div className="work-text-block">
                     <div className="work-header-row">

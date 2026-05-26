@@ -9,7 +9,7 @@ const DAMPING        = 0.99;
 const MOUSE_PULL_R   = 20;           // fluid pull radius
 const MOUSE_CUT_R    = 55;           // MASSIVE cut radius for right-click tearing
 const TEAR_DIST      = 60;           // tears when stretched too far
-const SPACING        = 32;           // High-performance smooth fluid mesh spacing
+const SPACING        = 8;            // high-res fluid mesh (originally 7)
 const ACCURACY       = 3;            // bouncy/stretchy pushmatrix feel
 
 const TD2 = TEAR_DIST * TEAR_DIST;
