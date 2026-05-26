@@ -79,7 +79,7 @@ export const WorkHorizontal: React.FC = () => {
   const displayProjects = config.projects;
 
   return (
-    <div className="work-section-horizontal career-section" id="work" ref={workRef} style={{ position: "relative", height: "100vh", overflow: "hidden", backgroundColor: "#09060d" }}>
+    <div className="work-section-horizontal" id="work" ref={workRef} style={{ position: "relative", height: "100vh", overflow: "hidden", backgroundColor: "#09060d" }}>
       {/* Pinned Masking Sidebar so cards slide elegantly *behind* the text */}
       <div 
         style={{ 
@@ -127,13 +127,23 @@ export const WorkHorizontal: React.FC = () => {
                     </div>
                   </div>
                   <div className="work-img-wrapper" style={{ borderRadius: "12px", overflow: "hidden" }}>
-                    <img src={project.image} alt={project.title} loading="lazy" />
+                    <img 
+                      src={project.image} 
+                      alt={project.title} 
+                      loading="lazy" 
+                      onLoad={() => ScrollTrigger.refresh()}
+                    />
                   </div>
                 </div>
               ) : (
                 <div className="work-content-odd glass-card" style={{ padding: "20px" }}>
                   <div className="work-img-wrapper" style={{ borderRadius: "12px", overflow: "hidden" }}>
-                    <img src={project.image} alt={project.title} loading="lazy" />
+                    <img 
+                      src={project.image} 
+                      alt={project.title} 
+                      loading="lazy" 
+                      onLoad={() => ScrollTrigger.refresh()}
+                    />
                   </div>
                   <div className="work-text-block">
                     <div className="work-header-row">
