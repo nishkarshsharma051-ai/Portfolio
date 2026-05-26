@@ -11,7 +11,7 @@ export const WorkHorizontal: React.FC = () => {
   const workRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (window.innerWidth <= 768) return;
+    if (window.innerWidth <= 1024) return;
 
     const workFlex = workRef.current?.querySelector(".work-flex-alt");
     if (!workFlex) return;

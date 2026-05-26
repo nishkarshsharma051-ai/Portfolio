@@ -124,7 +124,7 @@
 }
 
 /* ── Mobile Responsive Overrides ───────────────────────────────────────── */
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
   .work-flex-alt {
     flex-direction: column !important;
     height: auto !important;

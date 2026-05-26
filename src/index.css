@@ -563,7 +563,7 @@ body {
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
   .reference-topbar {
     display: flex !important;
     flex-direction: row !important;
@@ -591,6 +591,11 @@ body {
   .reference-nav a {
     font-size: 0.85rem !important;
     letter-spacing: 0.05em !important;
+  }
+
+  .reference-social-rail,
+  .reference-resume-rail {
+    display: none !important;
   }
 }
 
