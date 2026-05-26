@@ -2,8 +2,7 @@ import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Cursor from "../components/Cursor";
-import About from "../components/About";
-import Skills from "../components/Skills";
+import AboutAndSkills from "../components/AboutAndSkills";
 import Experience from "../components/Experience";
 import WorkHorizontal from "../components/WorkHorizontal";
 import Contact from "../components/Contact";
@@ -241,8 +240,7 @@ export const Home: React.FC = () => {
           </div>
         </section>
 
-        <About />
-        <Skills />
+        <AboutAndSkills />
         <Experience />
         <WorkHorizontal />
         <TechStack />
