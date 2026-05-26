@@ -154,7 +154,6 @@ const Landing: React.FC = () => {
         const root = document.getElementById("landing-root");
         if (root) {
           root.style.position = "static";
-          root.style.overflow = "visible";
         }
         const wrapper = document.getElementById("home-wrapper-in-landing");
         if (wrapper) {
@@ -169,17 +168,11 @@ const Landing: React.FC = () => {
     const md = (e: MouseEvent) => {
       const p = xy(e); cut = e.button !== 0;
       pmx = p.x; pmy = p.y; mx = p.x; my = p.y; down = true; 
-      startX = p.x; startY = p.y; startTime = Date.now();
       e.preventDefault();
     };
     const mm = (e: MouseEvent) => { const p = xy(e); pmx = mx; pmy = my; mx = p.x; my = p.y; };
     const mu = () => { 
       down = false; 
-      // Detect tap (distance moved < 10px and duration < 300ms)
-      const dx = mx - startX, dy = my - startY;
-      if (Math.sqrt(dx*dx + dy*dy) < 10 && Date.now() - startTime < 300) {
-        triggerExit();
-      }
     };
     const nc = (e: Event) => e.preventDefault();
 
@@ -192,7 +185,6 @@ const Landing: React.FC = () => {
       const r = canvas.getBoundingClientRect(), t = e.touches[0];
       cut = true; mx = t.clientX - r.left; my = t.clientY - r.top;
       pmx = mx; pmy = my; down = true; 
-      startX = mx; startY = my; startTime = Date.now();
       e.preventDefault();
     };
     const tm = (e: TouchEvent) => {
@@ -201,10 +193,6 @@ const Landing: React.FC = () => {
     };
     const te = () => { 
       down = false; 
-      const dx = mx - startX, dy = my - startY;
-      if (Math.sqrt(dx*dx + dy*dy) < 15 && Date.now() - startTime < 300) {
-        triggerExit();
-      }
     };
     canvas.addEventListener("touchstart", ts, { passive: false });
     canvas.addEventListener("touchmove",  tm, { passive: false });
@@ -296,7 +284,7 @@ const Landing: React.FC = () => {
       ctx.fillStyle = "rgba(255,255,255,0.35)";
       ctx.font = `500 11px Geist, sans-serif`;
       ctx.letterSpacing = "2px";
-      ctx.fillText("LEFT-DRAG TO PULL  ·  RIGHT-DRAG TO CUT  ·  TAP TO ENTER", W / 2, H - 40 + dropY);
+      ctx.fillText("LEFT-DRAG TO PULL  ·  RIGHT-DRAG TO CUT  ·  TEAR THE PAGE TO ENTER", W / 2, H - 40 + dropY);
       ctx.letterSpacing = "0px"; // reset
 
       // Reset composite operation so the next frame's cloth draws normally
@@ -305,7 +293,12 @@ const Landing: React.FC = () => {
       // Progress bar (fills as you tear)
       const ratio = cloth.torn();
       if (barRef.current && !exiting) {
-        barRef.current.style.width = `${Math.min(ratio / 0.5, 1) * 100}%`;
+        barRef.current.style.width = `${Math.min(ratio / 0.45, 1) * 100}%`;
+      }
+
+      // Check if torn enough (45%) to automatically trigger exit physics
+      if (ratio >= 0.45 && !exiting) {
+        triggerExit();
       }
 
       raf = requestAnimationFrame(loop);
