@@ -54,6 +54,16 @@ const socialLinks = [
 export const Home: React.FC = () => {
   const pageRef = useRef<HTMLDivElement>(null);
 
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, target: string) => {
+    e.preventDefault();
+    const lenis = (window as any).lenis;
+    if (lenis) {
+      lenis.scrollTo(target, { offset: 0, duration: 1.5 });
+    } else {
+      document.querySelector(target)?.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   useEffect(() => {
     const page = pageRef.current;
     if (!page) return;
@@ -143,13 +153,13 @@ export const Home: React.FC = () => {
         </a>
 
         <nav className="reference-nav" aria-label="Primary">
-          <a href="#about" data-cursor="disable">
+          <a href="#about" onClick={(e) => handleNavClick(e, "#about")} data-cursor="disable">
             About
           </a>
-          <a href="#work" data-cursor="disable">
+          <a href="#work" onClick={(e) => handleNavClick(e, "#work")} data-cursor="disable">
             Work
           </a>
-          <a href="#contact" data-cursor="disable">
+          <a href="#contact" onClick={(e) => handleNavClick(e, "#contact")} data-cursor="disable">
             Contact
           </a>
         </nav>
@@ -163,7 +173,7 @@ export const Home: React.FC = () => {
         ))}
       </aside>
 
-      <a className="reference-resume-rail" href="#contact" data-cursor="disable">
+      <a className="reference-resume-rail" href="#contact" onClick={(e) => handleNavClick(e, "#contact")} data-cursor="disable">
         Resume
       </a>
 

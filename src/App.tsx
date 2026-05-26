@@ -22,6 +22,8 @@ function App() {
       touchMultiplier: 2,
     });
 
+    (window as any).lenis = lenis;
+
     lenis.on("scroll", ScrollTrigger.update);
 
     const raf = (time: number) => {
