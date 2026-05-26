@@ -1,6 +1,6 @@
-@import "tailwindcss";
 @import "https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap";
 @import url('https://fonts.googleapis.com/css2?family=Anton&family=Roboto:wght@100;300;400;500;700;900&display=swap');
+@import "tailwindcss";
 
 @theme {
   --font-geist: 'Geist', sans-serif;
@@ -543,6 +543,24 @@ body {
   .reference-nav {
     justify-self: start;
   }
+
+  .reference-character-shell {
+    width: min(90vw, 560px);
+    height: min(70vh, 720px);
+    order: 2;
+  }
+
+  .reference-hero-right {
+    justify-self: start;
+    margin-top: -2rem;
+    padding-left: clamp(1.5rem, 3vw, 2rem);
+    order: 3;
+  }
+
+  .reference-social-rail {
+    left: 18px;
+    gap: 1.4rem;
+  }
 }
 
 @media (max-width: 768px) {
@@ -573,25 +591,6 @@ body {
   .reference-nav a {
     font-size: 0.85rem !important;
     letter-spacing: 0.05em !important;
-  }
-}
-
-  .reference-character-shell {
-    width: min(90vw, 560px);
-    height: min(70vh, 720px);
-    order: 2;
-  }
-
-  .reference-hero-right {
-    justify-self: start;
-    margin-top: -2rem;
-    padding-left: clamp(1.5rem, 3vw, 2rem);
-    order: 3;
-  }
-
-  .reference-social-rail {
-    left: 18px;
-    gap: 1.4rem;
   }
 }
 

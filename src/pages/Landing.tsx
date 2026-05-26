@@ -131,7 +131,6 @@ const Landing: React.FC = () => {
     // Input
     let cut = false, down = false;
     let mx = 0, my = 0, pmx = 0, pmy = 0;
-    let startX = 0, startY = 0, startTime = 0;
     let exiting = false;
 
     const xy = (e: MouseEvent) => {
