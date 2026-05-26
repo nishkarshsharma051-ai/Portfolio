@@ -74,7 +74,7 @@ export const Home: React.FC = () => {
 
       // 2. Main title elements rise up with scale and blur fade
       entryTl.fromTo(
-        ".reference-hero-left > *",
+        ".hero-scene-1 > *",
         { y: 80, opacity: 0, filter: "blur(15px)", scale: 0.96 },
         {
           y: 0,
@@ -96,18 +96,46 @@ export const Home: React.FC = () => {
         0.8
       );
 
-      gsap
-        .timeline({
-          scrollTrigger: {
-            trigger: ".reference-hero",
-            start: "top top",
-            end: "bottom top",
-            scrub: 1,
-          },
-        })
-        .to(".reference-hero-left", { y: "20%", opacity: 0.18 }, 0)
-        .to(".reference-hero-right", { y: "20%", opacity: 0.18 }, 0)
-        .to(".reference-backdrop", { opacity: 0.45 }, 0);
+      // 4. Cinematic Scroll Trigger: Transition from Scene 1 to Scene 2
+      const scrollTl = gsap.timeline({
+        scrollTrigger: {
+          trigger: ".reference-hero",
+          start: "top top",
+          end: "+=200%", // Scroll distance of pinning duration
+          pin: true,
+          scrub: 1,
+          anticipatePin: 1,
+        }
+      });
+
+      // Stage 1: Scale down and fade out Scene 1, shift up
+      scrollTl.to(".hero-scene-1", {
+        scale: 0.5,
+        opacity: 0,
+        y: "-25vh",
+        filter: "blur(10px)",
+        ease: "power2.inOut",
+        duration: 1
+      }, 0);
+
+      // Stage 2: Slide up and fade in Scene 2 (AI Dev + Full Stack)
+      scrollTl.fromTo(".hero-scene-2",
+        { opacity: 0, y: "25vh", scale: 0.9, filter: "blur(10px)" },
+        { opacity: 1, y: "0vh", scale: 1, filter: "blur(0px)", ease: "power2.out", duration: 1 },
+        0.3 // Overlaps with Stage 1
+      );
+
+      // Stage 3: Fade out Scene 2 at the very end of scrolling
+      scrollTl.to(".hero-scene-2", {
+        opacity: 0,
+        y: "-10vh",
+        filter: "blur(10px)",
+        ease: "power1.in",
+        duration: 0.5
+      }, 1.5);
+
+      // Sync backdrop opacity during this scroll sequence
+      scrollTl.to(".reference-backdrop", { opacity: 0.45, duration: 1.5 }, 0);
 
       gsap.to(".reference-social-rail, .reference-resume-rail", {
         scrollTrigger: {
@@ -168,28 +196,48 @@ export const Home: React.FC = () => {
       </a>
 
       <main className="reference-main">
-        <section className="reference-hero">
-          <div className="reference-hero-left" style={{ display: "flex", flexDirection: "column", alignItems: "flex-start" }}>
-            <p>Hello! I&apos;m</p>
-            <h1>
-              {config.developer.fullName.split(" ")[0].toUpperCase()}
+        <section 
+          className="reference-hero" 
+          style={{ 
+            display: "flex", 
+            flexDirection: "column", 
+            alignItems: "center", 
+            justifyContent: "center", 
+            minHeight: "100vh", 
+            position: "relative", 
+            overflow: "hidden", 
+            padding: 0 
+          }}
+        >
+          {/* Scene 1: Hello I'm Nishkarsh Sharma */}
+          <div className="hero-scene-1 absolute flex flex-col items-center justify-center text-center z-10 w-full px-6">
+            <p className="font-roboto text-sm md:text-lg text-[#c084fc] font-bold tracking-[0.25em] uppercase mb-4">
+              Hello! I'm
+            </p>
+            <h1 className="font-anton text-[7vw] md:text-[8vw] leading-none tracking-wider text-white uppercase">
+              {config.developer.fullName.split(" ")[0]}
               <br />
-              {config.developer.fullName
-                .split(" ")
-                .slice(1)
-                .join(" ")
-                .toUpperCase()}
+              <span className="text-white/90">{config.developer.fullName.split(" ").slice(1).join(" ")}</span>
             </h1>
-
-            <div style={{ marginTop: "40px" }}>
-              <p>An</p>
-              <h2>AI ENGINEER</h2>
-              <h3>FULL-STACK DEVELOPER</h3>
-            </div>
           </div>
 
-          <div className="reference-hero-right">
-            {/* Right side empty as requested for future additions */}
+          {/* Scene 2: AI Engineer + Full Stack Developer */}
+          <div 
+            className="hero-scene-2 absolute flex flex-col items-center justify-center text-center z-10 w-full px-6 opacity-0"
+            style={{ pointerEvents: "none" }}
+          >
+            <p className="font-roboto text-sm md:text-lg text-white/50 tracking-[0.2em] uppercase mb-4">
+              An
+            </p>
+            <h2 
+              className="font-anton text-[6.5vw] md:text-[7.5vw] leading-none tracking-wider text-[#c084fc] uppercase"
+              style={{ filter: "drop-shadow(0 0 15px rgba(192, 132, 252, 0.4))" }}
+            >
+              AI Engineer
+            </h2>
+            <h3 className="font-anton text-[5vw] md:text-[6vw] leading-none tracking-wider text-white uppercase mt-4">
+              Full-Stack Developer
+            </h3>
           </div>
         </section>
 
