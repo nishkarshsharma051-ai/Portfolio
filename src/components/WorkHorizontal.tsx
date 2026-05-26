@@ -26,38 +26,38 @@ export const WorkHorizontal: React.FC = () => {
         return -(workFlex.scrollWidth - parentWidth);
       };
 
-      // Smooth stagger entry animation as the section enters the screen
-      gsap.fromTo(
-        boxes,
-        { opacity: 0, y: 100, filter: "blur(5px)" },
-        {
-          opacity: 1,
-          y: 0,
-          filter: "blur(0px)",
-          stagger: 0.15,
-          duration: 1.2,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: workRef.current,
-            start: "top 95%",
-            once: true,
-          },
-        }
-      );
-
-      // Horizontal pinning animation
-      gsap.to(workFlex, {
-        x: getScrollAmount,
-        ease: "none",
+      // Unified Timeline sharing a single ScrollTrigger to prevent double-spacer conflicts
+      const tl = gsap.timeline({
         scrollTrigger: {
           trigger: workRef.current,
           start: "top top",
           pin: true,
           scrub: 1,
-          end: () => `+=${Math.abs(getScrollAmount())}`,
+          end: () => `+=${Math.abs(getScrollAmount()) + 200}`,
           invalidateOnRefresh: true,
-          anticipatePin: 1, // Reduces any pinning lag or jumping behavior
+          anticipatePin: 1,
         },
+      });
+
+      // 1. Stage 1: Staggered card fade-up as pinning commences
+      tl.fromTo(
+        boxes,
+        { opacity: 0, y: 80, filter: "blur(4px)" },
+        {
+          opacity: 1,
+          y: 0,
+          filter: "blur(0px)",
+          stagger: 0.1,
+          duration: 0.6,
+          ease: "power2.out",
+        }
+      );
+
+      // 2. Stage 2: Horizontal scroll scrub
+      tl.to(workFlex, {
+        x: getScrollAmount,
+        ease: "none",
+        duration: 2, // Smooth scrub scroll duration
       });
 
       // Apply tilt to each card inner content
