@@ -19,48 +19,48 @@ export const AboutAndSkills: React.FC = () => {
         scrollTrigger: {
           trigger: containerRef.current,
           start: "top top",
-          end: "+=250%",
+          end: "+=180%", // Shorter, tighter scroll distance to keep it punchy
           pin: true,
           scrub: 1,
           anticipatePin: 1,
         }
       });
 
-      // Stage 1: About Me card fades in and slides up initially
+      // Stage 1: About Me card fades up
       tl.fromTo(aboutCardRef.current,
-        { opacity: 0, y: 150, scale: 0.92, filter: "blur(15px)" },
-        { opacity: 1, y: 0, scale: 1, filter: "blur(0px)", ease: "power3.out", duration: 1 },
+        { opacity: 0, y: 100, scale: 0.95, filter: "blur(12px)" },
+        { opacity: 1, y: 0, scale: 1, filter: "blur(0px)", ease: "power2.out", duration: 1 },
         0
       );
 
-      // Stage 2: About Me card fades out, shrinks, and shifts up
+      // Stage 2: About Me card fades out AND Skills cards immediately start fading in (overlapping)
       tl.to(aboutCardRef.current, {
         opacity: 0,
-        y: -100,
-        scale: 0.9,
-        filter: "blur(10px)",
+        y: -80,
+        scale: 0.92,
+        filter: "blur(8px)",
         ease: "power2.inOut",
         duration: 1
       }, 1);
 
-      // Stage 3: Developer Cards slide in from left & right
+      // Stage 3: Skills cards fade in and slide horizontally concurrently
       tl.fromTo(devCardRef.current,
-        { opacity: 0, x: -150, scale: 0.95, filter: "blur(15px)" },
-        { opacity: 1, x: 0, scale: 1, filter: "blur(0px)", ease: "power3.out", duration: 1 },
-        1.2
+        { opacity: 0, x: -100, scale: 0.95, filter: "blur(12px)" },
+        { opacity: 1, x: 0, scale: 1, filter: "blur(0px)", ease: "power2.out", duration: 1 },
+        1.1 // Starts immediately as About Me card begins to exit
       );
 
       tl.fromTo(fullStackCardRef.current,
-        { opacity: 0, x: 150, scale: 0.95, filter: "blur(15px)" },
-        { opacity: 1, x: 0, scale: 1, filter: "blur(0px)", ease: "power3.out", duration: 1 },
-        1.2
+        { opacity: 0, x: 100, scale: 0.95, filter: "blur(12px)" },
+        { opacity: 1, x: 0, scale: 1, filter: "blur(0px)", ease: "power2.out", duration: 1 },
+        1.1 // Starts immediately as About Me card begins to exit
       );
 
-      // Stage 4: Developer Cards fade out at the end
+      // Stage 4: Skills cards fade out and exit to allow smooth vertical release
       tl.to([devCardRef.current, fullStackCardRef.current], {
         opacity: 0,
-        y: -50,
-        filter: "blur(10px)",
+        y: -40,
+        filter: "blur(8px)",
         ease: "power1.in",
         duration: 0.8
       }, 2.2);
