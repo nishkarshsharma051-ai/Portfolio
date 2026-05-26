@@ -153,6 +153,8 @@ const Landing: React.FC = () => {
         const root = document.getElementById("landing-root");
         if (root) {
           root.style.position = "static";
+          root.style.overflow = "visible";
+          root.style.height = "auto";
         }
         const wrapper = document.getElementById("home-wrapper-in-landing");
         if (wrapper) {
