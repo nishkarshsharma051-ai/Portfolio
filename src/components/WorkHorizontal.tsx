@@ -71,17 +71,17 @@ export const WorkHorizontal: React.FC = () => {
   const displayProjects = config.projects;
 
   return (
-    <div className="work-section-horizontal career-section" id="work" ref={workRef} style={{ position: "relative", height: "100vh", overflow: "hidden" }}>
-      <div style={{ position: "absolute", top: "15vh", left: "5vw", zIndex: 10, width: "20vw" }}>
-        <h2 style={{ fontSize: "5rem", fontWeight: 700, lineHeight: 1.1, margin: 0, letterSpacing: "0.05em" }}>
+    <div className="work-section-horizontal career-section relative min-h-screen md:h-screen md:overflow-hidden bg-[#09060d] py-12 md:py-0" id="work" ref={workRef}>
+      <div className="relative md:absolute top-0 md:top-[15vh] left-0 md:left-[5vw] z-10 w-full md:w-[20vw] px-6 md:px-0 mb-8 md:mb-0">
+        <h2 className="font-anton text-5xl md:text-8xl font-normal leading-none tracking-wider text-white uppercase m-0">
           MY
           <br />
-          <span style={{ color: "#c697ff" }}>WORK</span>
+          <span className="text-[#c697ff]">WORK</span>
         </h2>
       </div>
       
-      <div style={{ marginLeft: "25vw", width: "75vw", height: "100%", overflow: "hidden" }}>
-        <div className="work-flex-alt" style={{ paddingLeft: "2rem", paddingRight: "5vw" }}>
+      <div className="w-full md:ml-[25vw] md:w-[75vw] h-auto md:h-full md:overflow-hidden">
+        <div className="work-flex-alt">
         {displayProjects.map((project, index) => {
           const num = (index + 1).toString().padStart(2, "0");
           const isEven = index % 2 === 0;

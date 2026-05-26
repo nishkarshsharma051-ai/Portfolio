@@ -122,3 +122,58 @@
   background-color: rgba(255, 255, 255, 0.1);
   margin: 0 2rem;
 }
+
+/* ── Mobile Responsive Overrides ───────────────────────────────────────── */
+@media (max-width: 768px) {
+  .work-flex-alt {
+    flex-direction: column !important;
+    height: auto !important;
+    width: 100% !important;
+    padding: 0 1.5rem !important;
+  }
+  
+  .work-column-alt {
+    flex-direction: column !important;
+    height: auto !important;
+    width: 100% !important;
+    margin-bottom: 2rem;
+  }
+  
+  .work-content-even, .work-content-odd {
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+    padding: 24px !important;
+    gap: 1.5rem;
+  }
+  
+  .work-img-wrapper {
+    height: 220px !important;
+    width: 100% !important;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .work-text-block {
+    gap: 1rem !important;
+  }
+
+  .work-vert-divider {
+    width: 100% !important;
+    height: 1px !important;
+    margin: 3rem 0 !important;
+    background-color: rgba(255, 255, 255, 0.08);
+  }
+
+  .work-num {
+    font-size: 3.5rem !important;
+  }
+
+  .work-title {
+    font-size: 1.6rem !important;
+  }
+
+  .tools-label {
+    font-size: 1.2rem !important;
+  }
+}
