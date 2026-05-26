@@ -65,22 +65,45 @@ export const WorkHorizontal: React.FC = () => {
       cards.forEach(card => applyCardTilt(card));
     });
 
-    return () => ctx.revert();
+    // Force ScrollTrigger to refresh after 500ms to align correctly with Lenis smooth scroll
+    const refreshTimeout = setTimeout(() => {
+      ScrollTrigger.refresh();
+    }, 500);
+
+    return () => {
+      ctx.revert();
+      clearTimeout(refreshTimeout);
+    };
   }, []);
 
   const displayProjects = config.projects;
 
   return (
-    <div className="work-section-horizontal career-section" id="work" ref={workRef} style={{ position: "relative", height: "100vh", overflow: "hidden" }}>
-      <div style={{ position: "absolute", top: "15vh", left: "5vw", zIndex: 10, width: "20vw" }}>
-        <h2 style={{ fontSize: "5rem", fontWeight: 700, lineHeight: 1.1, margin: 0, letterSpacing: "0.05em" }}>
+    <div className="work-section-horizontal career-section" id="work" ref={workRef} style={{ position: "relative", height: "100vh", overflow: "hidden", backgroundColor: "#09060d" }}>
+      {/* Pinned Masking Sidebar so cards slide elegantly *behind* the text */}
+      <div 
+        style={{ 
+          position: "absolute", 
+          top: 0, 
+          left: 0, 
+          height: "100vh", 
+          width: "25vw", 
+          zIndex: 20, 
+          display: "flex",
+          alignItems: "center",
+          paddingLeft: "5vw",
+          background: "linear-gradient(90deg, #09060d 80%, rgba(9,6,13,0) 100%)",
+          pointerEvents: "none"
+        }}
+      >
+        <h2 style={{ fontSize: "5rem", fontWeight: 700, lineHeight: 1.1, margin: 0, letterSpacing: "0.05em", fontFamily: "var(--font-anton)" }}>
           MY
           <br />
           <span style={{ color: "#c697ff" }}>WORK</span>
         </h2>
       </div>
       
-      <div style={{ marginLeft: "25vw", width: "75vw", height: "100%", overflow: "hidden" }}>
+      <div style={{ marginLeft: "25vw", width: "75vw", height: "100%", overflow: "hidden", position: "relative", zIndex: 10 }}>
         <div className="work-flex-alt" style={{ paddingLeft: "2rem", paddingRight: "5vw" }}>
         {displayProjects.map((project, index) => {
           const num = (index + 1).toString().padStart(2, "0");
