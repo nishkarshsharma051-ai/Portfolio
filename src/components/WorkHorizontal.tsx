@@ -71,64 +71,64 @@ export const WorkHorizontal: React.FC = () => {
   const displayProjects = config.projects;
 
   return (
-    <div className="work-section-horizontal career-section relative min-h-screen md:h-screen md:overflow-hidden bg-[#09060d] py-12 md:py-0" id="work" ref={workRef}>
-      <div className="relative md:absolute top-0 md:top-[15vh] left-0 md:left-[5vw] z-10 w-full md:w-[20vw] px-6 md:px-0 mb-8 md:mb-0">
-        <h2 className="font-anton text-5xl md:text-8xl font-normal leading-none tracking-wider text-white uppercase m-0">
+    <div className="work-section-horizontal career-section relative min-h-screen lg:h-screen lg:overflow-hidden bg-[#09060d] py-12 lg:py-0" id="work" ref={workRef}>
+      <div className="relative lg:absolute top-0 lg:top-[15vh] left-0 lg:left-[5vw] z-10 w-full lg:w-[20vw] px-6 lg:px-0 mb-8 lg:mb-0">
+        <h2 className="font-anton text-5xl lg:text-8xl font-normal leading-none tracking-wider text-white uppercase m-0">
           MY
           <br />
           <span className="text-[#c697ff]">WORK</span>
         </h2>
       </div>
       
-      <div className="w-full md:ml-[25vw] md:w-[75vw] h-auto md:h-full md:overflow-hidden">
-        <div className="work-flex-alt">
+      <div className="w-full lg:ml-[25vw] lg:w-[75vw] h-auto lg:h-full lg:overflow-hidden px-6 lg:px-0">
+        <div className="work-flex-alt flex flex-col lg:flex-row lg:items-center lg:h-full gap-12 lg:gap-0 py-8 lg:py-0 w-full lg:w-max">
         {displayProjects.map((project, index) => {
           const num = (index + 1).toString().padStart(2, "0");
           const isEven = index % 2 === 0;
 
           return (
-            <div key={project.id} className="work-column-alt">
+            <div key={project.id} className="work-column-alt flex flex-col lg:flex-row lg:items-center lg:h-full w-full lg:w-auto">
               {isEven ? (
-                <div className="work-content-even glass-card" style={{ padding: "20px" }}>
-                  <div className="work-text-block">
-                    <div className="work-header-row">
-                      <span className="work-num">{num}</span>
-                      <div className="work-title-group">
-                        <h4 className="work-title">{project.title}</h4>
-                        <span className="work-cat">{project.category}</span>
+                <div className="work-content-even glass-card flex flex-col justify-between w-full lg:w-[45vw] lg:max-w-[500px] h-auto lg:h-[70vh] p-6 lg:p-10 gap-6 lg:gap-0">
+                  <div className="work-text-block flex flex-col gap-4 lg:gap-8">
+                    <div className="work-header-row flex justify-between items-start w-full">
+                      <span className="work-num text-5xl lg:text-8xl font-bold leading-none text-white">{num}</span>
+                      <div className="work-title-group text-right flex flex-col items-end">
+                        <h4 className="work-title text-2xl lg:text-3xl font-semibold mb-2 text-white">{project.title}</h4>
+                        <span className="work-cat text-sm lg:text-base text-gray-400">{project.category}</span>
                       </div>
                     </div>
-                    <div className="work-tools">
-                      <span className="tools-label">Tools and features</span>
-                      <p className="tools-list">{project.technologies}</p>
+                    <div className="work-tools flex flex-col gap-2">
+                      <span className="tools-label text-lg lg:text-2xl font-semibold text-white">Tools and features</span>
+                      <p className="tools-list text-sm lg:text-base text-gray-500 leading-relaxed">{project.technologies}</p>
                     </div>
                   </div>
-                  <div className="work-img-wrapper" style={{ borderRadius: "12px", overflow: "hidden" }}>
-                    <img src={project.image} alt={project.title} loading="lazy" />
+                  <div className="work-img-wrapper w-full h-[220px] lg:h-[350px] flex items-center justify-center overflow-hidden rounded-xl mt-4 lg:mt-0">
+                    <img src={project.image} alt={project.title} className="max-w-full max-h-full object-contain rounded-xl" loading="lazy" />
                   </div>
                 </div>
               ) : (
-                <div className="work-content-odd glass-card" style={{ padding: "20px" }}>
-                  <div className="work-img-wrapper" style={{ borderRadius: "12px", overflow: "hidden" }}>
-                    <img src={project.image} alt={project.title} loading="lazy" />
+                <div className="work-content-odd glass-card flex flex-col justify-between w-full lg:w-[45vw] lg:max-w-[500px] h-auto lg:h-[70vh] p-6 lg:p-10 gap-6 lg:gap-0">
+                  <div className="work-img-wrapper w-full h-[220px] lg:h-[350px] flex items-center justify-center overflow-hidden rounded-xl mb-4 lg:mb-0">
+                    <img src={project.image} alt={project.title} className="max-w-full max-h-full object-contain rounded-xl" loading="lazy" />
                   </div>
-                  <div className="work-text-block">
-                    <div className="work-header-row">
-                      <span className="work-num">{num}</span>
-                      <div className="work-title-group">
-                        <h4 className="work-title">{project.title}</h4>
-                        <span className="work-cat">{project.category}</span>
+                  <div className="work-text-block flex flex-col gap-4 lg:gap-8">
+                    <div className="work-header-row flex justify-between items-start w-full">
+                      <span className="work-num text-5xl lg:text-8xl font-bold leading-none text-white">{num}</span>
+                      <div className="work-title-group text-right flex flex-col items-end">
+                        <h4 className="work-title text-2xl lg:text-3xl font-semibold mb-2 text-white">{project.title}</h4>
+                        <span className="work-cat text-sm lg:text-base text-gray-400">{project.category}</span>
                       </div>
                     </div>
-                    <div className="work-tools">
-                      <span className="tools-label">Tools and features</span>
-                      <p className="tools-list">{project.technologies}</p>
+                    <div className="work-tools flex flex-col gap-2">
+                      <span className="tools-label text-lg lg:text-2xl font-semibold text-white">Tools and features</span>
+                      <p className="tools-list text-sm lg:text-base text-gray-500 leading-relaxed">{project.technologies}</p>
                     </div>
                   </div>
                 </div>
               )}
               {index < displayProjects.length - 1 && (
-                <div className="work-vert-divider"></div>
+                <div className="work-vert-divider w-full lg:w-[1px] h-[1px] lg:h-[60vh] bg-white/10 my-8 lg:my-0 lg:mx-8"></div>
               )}
             </div>
           );
