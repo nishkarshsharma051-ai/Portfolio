@@ -38,8 +38,8 @@ export const WorkHorizontal: React.FC = () => {
           duration: 1.2,
           ease: "power3.out",
           scrollTrigger: {
-            trigger: ".work-section-horizontal",
-            start: "top 85%",
+            trigger: workRef.current,
+            start: "top 95%",
             once: true,
           },
         }
@@ -50,7 +50,7 @@ export const WorkHorizontal: React.FC = () => {
         x: getScrollAmount,
         ease: "none",
         scrollTrigger: {
-          trigger: ".work-section-horizontal",
+          trigger: workRef.current,
           start: "top top",
           pin: true,
           scrub: 1,
