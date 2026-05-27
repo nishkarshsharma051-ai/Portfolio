@@ -80,14 +80,14 @@ export const WorkHorizontal: React.FC = () => {
         </h2>
       </div>
       
-      <div className="w-full lg:ml-[25vw] lg:w-[75vw] h-auto lg:h-full lg:overflow-hidden px-6 lg:px-0">
-        <div className="work-flex-alt flex flex-col lg:flex-row lg:items-center lg:h-full gap-12 lg:gap-0 py-8 lg:py-0 w-full lg:w-max">
+      <div className="w-full lg:ml-[25vw] lg:w-[75vw] h-auto lg:h-full lg:overflow-hidden px-6 lg:px-0 overflow-x-auto scrollbar-none" style={{ WebkitOverflowScrolling: "touch" }}>
+        <div className="work-flex-alt flex flex-row lg:items-center lg:h-full gap-12 lg:gap-0 py-8 lg:py-0 w-max">
         {displayProjects.map((project, index) => {
           const num = (index + 1).toString().padStart(2, "0");
           const isEven = index % 2 === 0;
 
           return (
-            <div key={project.id} className="work-column-alt flex flex-col lg:flex-row lg:items-center lg:h-full w-full lg:w-auto">
+            <div key={project.id} className="work-column-alt flex flex-row lg:items-center lg:h-full w-auto">
               {isEven ? (
                 <div className="work-content-even glass-card flex flex-col justify-between w-full lg:w-[45vw] lg:max-w-[500px] h-auto lg:h-[70vh] p-6 lg:p-10 gap-6 lg:gap-0">
                   <div className="work-text-block flex flex-col gap-4 lg:gap-8">
