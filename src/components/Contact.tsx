@@ -43,18 +43,18 @@ export const Contact: React.FC = () => {
 
           <div className="flex flex-wrap gap-4 items-center">
             <button 
-              className="px-8 py-4 rounded-full border border-[#c697ff]/40 bg-[#c697ff]/10 hover:bg-[#c697ff]/20 text-white font-bold text-sm tracking-wider transition-all duration-300 shadow-[0_0_20px_rgba(198,151,255,0.15)] hover:shadow-[0_0_25px_rgba(198,151,255,0.3)] hover:scale-105 cursor-pointer"
+              className="contact-cta-btn px-12 py-5 rounded-full border border-[#c697ff]/40 bg-[#c697ff]/10 hover:bg-[#c697ff]/20 text-white font-bold text-sm tracking-wider transition-all duration-300 shadow-[0_0_20px_rgba(198,151,255,0.15)] hover:shadow-[0_0_25px_rgba(198,151,255,0.3)] hover:scale-105 cursor-pointer flex items-center justify-center gap-3"
               onClick={handleTalkClick} 
               data-cursor="disable"
             >
-              💬 TALK WITH ME
+              <span className="text-base">💬</span> <span className="leading-none">TALK WITH ME</span>
             </button>
             <a 
-              className="px-8 py-4 rounded-full bg-white hover:bg-[#c697ff] text-black hover:text-white font-bold text-sm tracking-wider transition-all duration-300 hover:scale-105"
+              className="contact-cta-btn px-12 py-5 rounded-full bg-white hover:bg-[#c697ff] text-black hover:text-white font-bold text-sm tracking-wider transition-all duration-300 hover:scale-105 flex items-center justify-center gap-3"
               href={`mailto:${config.contact.email}`} 
               data-cursor="disable"
             >
-              ✉️ HIRE ME
+              <span className="text-base">✉️</span> <span className="leading-none">HIRE ME</span>
             </a>
           </div>
         </motion.div>
