@@ -158,6 +158,7 @@ const Landing: React.FC = () => {
     let cut = false, down = false;
     let mx = 0, my = 0, pmx = 0, pmy = 0;
     let exiting = false;
+    let startX = 0, startY = 0, startTime = 0;
 
     const xy = (e: MouseEvent) => {
       const r = canvas.getBoundingClientRect();
@@ -198,11 +199,17 @@ const Landing: React.FC = () => {
     const md = (e: MouseEvent) => {
       const p = xy(e); cut = e.button !== 0;
       pmx = p.x; pmy = p.y; mx = p.x; my = p.y; down = true; 
+      startX = p.x; startY = p.y; startTime = Date.now();
       e.preventDefault();
     };
     const mm = (e: MouseEvent) => { const p = xy(e); pmx = mx; pmy = my; mx = p.x; my = p.y; };
     const mu = () => { 
       down = false; 
+      // Detect tap (distance moved < 10px and duration < 300ms)
+      const dx = mx - startX, dy = my - startY;
+      if (Math.sqrt(dx*dx + dy*dy) < 10 && Date.now() - startTime < 300) {
+        triggerExit();
+      }
     };
     const nc = (e: Event) => e.preventDefault();
 
@@ -215,6 +222,7 @@ const Landing: React.FC = () => {
       const r = canvas.getBoundingClientRect(), t = e.touches[0];
       cut = true; mx = t.clientX - r.left; my = t.clientY - r.top;
       pmx = mx; pmy = my; down = true; 
+      startX = mx; startY = my; startTime = Date.now();
       e.preventDefault();
     };
     const tm = (e: TouchEvent) => {
@@ -223,6 +231,11 @@ const Landing: React.FC = () => {
     };
     const te = () => { 
       down = false; 
+      // Detect touch tap
+      const dx = mx - startX, dy = my - startY;
+      if (Math.sqrt(dx*dx + dy*dy) < 15 && Date.now() - startTime < 300) {
+        triggerExit();
+      }
     };
     canvas.addEventListener("touchstart", ts, { passive: false });
     canvas.addEventListener("touchmove",  tm, { passive: false });
@@ -317,8 +330,8 @@ const Landing: React.FC = () => {
       ctx.font = `500 ${isMobile ? 9 : 11}px Geist, sans-serif`;
       ctx.letterSpacing = "2px";
       const instructionText = isMobile 
-        ? "DRAG TO TEAR THE PAGE TO ENTER" 
-        : "LEFT-DRAG TO PULL  ·  RIGHT-DRAG TO CUT  ·  TEAR THE PAGE TO ENTER";
+        ? "TAP OR DRAG TO ENTER" 
+        : "LEFT-DRAG TO PULL  ·  RIGHT-DRAG TO CUT  ·  TAP TO ENTER";
       ctx.fillText(instructionText, W / 2, H - 40 + dropY);
       ctx.letterSpacing = "0px"; // reset
  
