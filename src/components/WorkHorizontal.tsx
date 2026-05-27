@@ -71,8 +71,8 @@ export const WorkHorizontal: React.FC = () => {
   const displayProjects = config.projects;
 
   return (
-    <div className="work-section-horizontal career-section relative min-h-screen lg:h-screen lg:overflow-hidden bg-[#09060d] py-12 lg:py-0" id="work" ref={workRef}>
-      <div className="relative lg:absolute top-0 lg:top-[15vh] left-0 lg:left-[5vw] z-10 w-full lg:w-[20vw] px-6 lg:px-0 mb-8 lg:mb-0">
+    <div className="work-section-horizontal career-section relative min-h-screen lg:h-screen lg:overflow-hidden bg-[#09060d] py-12 lg:py-0 flex flex-col justify-start gap-4 lg:block" id="work" ref={workRef}>
+      <div className="relative lg:absolute top-0 lg:top-[15vh] left-0 lg:left-[5vw] z-10 w-full lg:w-[20vw] px-6 lg:px-0 mb-4 lg:mb-0">
         <h2 className="font-anton text-5xl lg:text-8xl font-normal leading-none tracking-wider text-white uppercase m-0">
           MY
           <br />
