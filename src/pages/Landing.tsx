@@ -119,6 +119,32 @@ const Landing: React.FC = () => {
     if (!canvas || !wrap) return;
     const ctx = canvas.getContext("2d")!;
 
+    // ─── Scroll Locking for Mobile / Lenis ──────────────────────────────
+    document.body.classList.add("lock-scroll");
+    document.documentElement.classList.add("lock-scroll");
+
+    let lenisTimer: number;
+    const stopLenis = () => {
+      const lenis = (window as any).lenis;
+      if (lenis) {
+        lenis.stop();
+      } else {
+        lenisTimer = requestAnimationFrame(stopLenis);
+      }
+    };
+    stopLenis();
+
+    const restoreScroll = () => {
+      document.body.classList.remove("lock-scroll");
+      document.documentElement.classList.remove("lock-scroll");
+      cancelAnimationFrame(lenisTimer);
+      const lenis = (window as any).lenis;
+      if (lenis) {
+        lenis.start();
+      }
+    };
+    // ──────────────────────────────────────────────────────────────────
+
     let cloth: Cloth | null = null;
 
     const resize = () => {
@@ -163,6 +189,9 @@ const Landing: React.FC = () => {
           wrapper.style.pointerEvents = "auto";
         }
         if (wrapRef.current) wrapRef.current.style.display = "none";
+
+        // Re-enable scrolling after the cloth transition finishes completely
+        restoreScroll();
       }, 1500);
     };
 
@@ -321,6 +350,7 @@ const Landing: React.FC = () => {
       canvas.removeEventListener("touchmove",   tm);
       window.removeEventListener("touchend",    te);
       window.removeEventListener("resize",      resize);
+      restoreScroll();
     };
   }, [navigate]);
 
@@ -332,8 +362,8 @@ const Landing: React.FC = () => {
       </div>
 
       {/* Cloth overlay */}
-      <div ref={wrapRef} style={{ position: "absolute", inset: 0, zIndex: 9999 }}>
-        <canvas ref={canvasRef} style={{ display: "block", cursor: "crosshair" }} />
+      <div ref={wrapRef} style={{ position: "absolute", inset: 0, zIndex: 9999, touchAction: "none" }}>
+        <canvas ref={canvasRef} style={{ display: "block", cursor: "crosshair", touchAction: "none" }} />
       </div>
 
       {/* The UI Overlay (Progress Bar) */}

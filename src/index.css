@@ -3147,3 +3147,12 @@ body {
   pointer-events: none;
   z-index: 0;
 }
+
+/* Lock scroll utility for Landing / Preloader screens, overriding any responsive styles */
+body.lock-scroll, html.lock-scroll {
+  overflow: hidden !important;
+  height: 100% !important;
+  position: fixed !important;
+  width: 100% !important;
+}
+
