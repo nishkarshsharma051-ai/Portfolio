@@ -24,13 +24,13 @@ export const Contact: React.FC = () => {
 
       <div className="contact-container w-full max-w-[1300px] mx-auto px-6 flex flex-col gap-16">
         
-        {/* Large Cinematic Header Card */}
+        {/* Large Cinematic Header - Borderless but beautifully aligned */}
         <motion.div 
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="glass-card p-10 md:p-14 border border-white/5 bg-white/[0.01] backdrop-blur-xl rounded-2xl flex flex-col md:flex-row justify-between items-center gap-8 w-full"
+          className="flex flex-col md:flex-row justify-between items-start md:items-center gap-8 w-full border-b border-white/5 pb-12"
         >
           <div className="flex flex-col items-start gap-4">
             <p className="font-roboto text-xs md:text-sm text-[#c697ff] uppercase tracking-[0.2em] font-semibold">Have a concept?</p>
@@ -59,27 +59,27 @@ export const Contact: React.FC = () => {
           </div>
         </motion.div>
 
-        {/* Lower Links Row */}
-        <div className="flex flex-col lg:flex-row justify-between gap-12 w-full pt-4">
+        {/* Lower Links Row - Borderless */}
+        <div className="flex flex-col lg:flex-row justify-between gap-12 w-full">
           
           {/* Connection Channels column */}
-          <div className="flex flex-col w-full lg:w-[45%] gap-6">
+          <div className="flex flex-col w-full lg:w-[50%] gap-8">
             <div className="flex flex-col gap-2">
               <h4 className="text-xs uppercase tracking-widest text-gray-500 font-bold">Email Address</h4>
               <p>
                 <a 
                   href={`mailto:${config.contact.email}`} 
                   data-cursor="disable" 
-                  className="text-lg md:text-xl font-semibold text-white hover:text-[#c697ff] transition duration-300"
+                  className="text-xl md:text-2xl font-semibold text-white hover:text-[#c697ff] transition duration-300"
                 >
                   {config.contact.email}
                 </a>
               </p>
             </div>
 
-            <div className="flex flex-col gap-4 mt-4">
+            <div className="flex flex-col gap-4">
               <h4 className="text-xs uppercase tracking-widest text-gray-500 font-bold">Social Channels</h4>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="grid grid-cols-2 gap-6">
                 {socials.map((social, idx) => (
                   <a 
                     key={idx}
@@ -87,7 +87,7 @@ export const Contact: React.FC = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                     data-cursor="disable"
-                    className="glass-card p-4 flex flex-col gap-1 border border-white/5 bg-white/[0.02] hover:bg-white/[0.05] hover:border-[#c697ff]/30 transition duration-300 rounded-xl"
+                    className="flex flex-col gap-1 hover:translate-x-1 transition duration-300"
                   >
                     <span className="text-sm font-bold text-white tracking-wide" style={{ color: social.color }}>
                       {social.name}
