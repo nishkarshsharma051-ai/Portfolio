@@ -122,7 +122,7 @@ export const WorkHorizontal: React.FC = () => {
               initial="enter"
               animate="center"
               exit="exit"
-              className="glass-card flex flex-col justify-between w-full max-w-[720px] p-10 md:p-16 gap-8 border border-white/5 bg-white/[0.02] backdrop-blur-xl rounded-2xl"
+              className="glass-card my-work-card flex flex-col justify-between w-full max-w-[720px] gap-8 border border-white/5 bg-white/[0.02] backdrop-blur-xl rounded-2xl"
             >
               <div className="flex flex-col gap-6">
                 {/* Header Row */}

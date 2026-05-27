@@ -189,3 +189,16 @@
   scrollbar-width: none;
 }
 
+/* Custom explicit padding to prevent text touching borders */
+.my-work-card {
+  padding: 48px !important;
+  box-sizing: border-box !important;
+}
+
+@media (max-width: 768px) {
+  .my-work-card {
+    padding: 24px !important;
+  }
+}
+
+
