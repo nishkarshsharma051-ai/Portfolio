@@ -1,140 +1,164 @@
-import React, { useEffect, useRef } from "react";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { gsap } from "gsap";
+import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { config } from "./config";
-import { applyCardTilt } from "../utils/animations";
 import "../myworks.css";
 
-gsap.registerPlugin(ScrollTrigger);
-
 export const WorkHorizontal: React.FC = () => {
-  const workRef = useRef<HTMLDivElement>(null);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [direction, setDirection] = useState(1); // 1 for next, -1 for prev
 
-  useEffect(() => {
-    if (window.innerWidth <= 1024) return;
+  const projects = config.projects;
 
-    const workFlex = workRef.current?.querySelector(".work-flex-alt");
-    if (!workFlex) return;
+  const handleNext = () => {
+    setDirection(1);
+    setCurrentIndex((prev) => (prev + 1) % projects.length);
+  };
 
-    const boxes = workFlex.querySelectorAll(".work-column-alt");
-    if (boxes.length === 0) return;
+  const handlePrev = () => {
+    setDirection(-1);
+    setCurrentIndex((prev) => (prev - 1 + projects.length) % projects.length);
+  };
 
-    const ctx = gsap.context(() => {
-      // Calculate how far to scroll based on the width of all cards minus wrapper width
-      const getScrollAmount = () => {
-        const parentWidth = workFlex.parentElement?.offsetWidth || window.innerWidth;
-        return -(workFlex.scrollWidth - parentWidth);
-      };
+  const currentProject = projects[currentIndex];
+  const num = (currentIndex + 1).toString().padStart(2, "0");
 
-      // Smooth stagger entry animation as the section enters the screen
-      gsap.fromTo(
-        boxes,
-        { opacity: 0, y: 100, filter: "blur(5px)" },
-        {
-          opacity: 1,
-          y: 0,
-          filter: "blur(0px)",
-          stagger: 0.15,
-          duration: 1.2,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: ".work-section-horizontal",
-            start: "top 85%",
-            once: true,
-          },
-        }
-      );
-
-      // Horizontal pinning animation
-      gsap.to(workFlex, {
-        x: getScrollAmount,
-        ease: "none",
-        scrollTrigger: {
-          trigger: ".work-section-horizontal",
-          start: "top top",
-          pin: true,
-          scrub: 1,
-          end: () => `+=${Math.abs(getScrollAmount())}`,
-          invalidateOnRefresh: true,
-          anticipatePin: 1, // Reduces any pinning lag or jumping behavior
-        },
-      });
-
-      // Apply tilt to each card inner content
-      const cards = workFlex.querySelectorAll<HTMLElement>(".work-content-even, .work-content-odd");
-      cards.forEach(card => applyCardTilt(card));
-    });
-
-    return () => ctx.revert();
-  }, []);
-
-  const displayProjects = config.projects;
+  const slideVariants: any = {
+    enter: (dir: number) => ({
+      x: dir > 0 ? 80 : -80,
+      opacity: 0,
+      filter: "blur(5px)",
+    }),
+    center: {
+      x: 0,
+      opacity: 1,
+      filter: "blur(0px)",
+      transition: {
+        duration: 0.4,
+        ease: "easeInOut",
+      },
+    },
+    exit: (dir: number) => ({
+      x: dir < 0 ? 80 : -80,
+      opacity: 0,
+      filter: "blur(5px)",
+      transition: {
+        duration: 0.4,
+        ease: "easeInOut",
+      },
+    }),
+  };
 
   return (
-    <div className="work-section-horizontal career-section relative min-h-screen lg:h-screen lg:overflow-hidden bg-[#09060d] py-12 lg:py-0 flex flex-col justify-start gap-4 lg:block" id="work" ref={workRef}>
-      <div className="relative lg:absolute top-0 lg:top-[15vh] left-0 lg:left-[5vw] z-10 w-full lg:w-[20vw] px-6 lg:px-0 mb-4 lg:mb-0">
-        <h2 className="font-anton text-5xl lg:text-8xl font-normal leading-none tracking-wider text-white uppercase m-0">
-          MY
-          <br />
-          <span className="text-[#c697ff]">WORK</span>
-        </h2>
-      </div>
-      
-      <div className="w-full lg:ml-[25vw] lg:w-[75vw] h-auto lg:h-full lg:overflow-hidden px-6 lg:px-0 overflow-x-auto scrollbar-none" style={{ WebkitOverflowScrolling: "touch" }}>
-        <div className="work-flex-alt flex flex-row lg:items-center lg:h-full gap-12 lg:gap-0 py-8 lg:py-0 w-max">
-        {displayProjects.map((project, index) => {
-          const num = (index + 1).toString().padStart(2, "0");
-          const isEven = index % 2 === 0;
-
-          return (
-            <div key={project.id} className="work-column-alt flex flex-row lg:items-center lg:h-full w-auto">
-              {isEven ? (
-                <div className="work-content-even glass-card flex flex-col justify-between w-full lg:w-[45vw] lg:max-w-[500px] h-auto lg:h-[70vh] p-6 lg:p-10 gap-6 lg:gap-0">
-                  <div className="work-text-block flex flex-col gap-4 lg:gap-8">
-                    <div className="work-header-row flex justify-between items-start w-full">
-                      <span className="work-num text-5xl lg:text-8xl font-bold leading-none text-white">{num}</span>
-                      <div className="work-title-group text-right flex flex-col items-end">
-                        <h4 className="work-title text-2xl lg:text-3xl font-semibold mb-2 text-white">{project.title}</h4>
-                        <span className="work-cat text-sm lg:text-base text-gray-400">{project.category}</span>
-                      </div>
-                    </div>
-                    <div className="work-tools flex flex-col gap-2">
-                      <span className="tools-label text-lg lg:text-2xl font-semibold text-white">Tools and features</span>
-                      <p className="tools-list text-sm lg:text-base text-gray-500 leading-relaxed">{project.technologies}</p>
-                    </div>
-                  </div>
-                  <div className="work-img-wrapper w-full h-[220px] lg:h-[350px] flex items-center justify-center overflow-hidden rounded-xl mt-4 lg:mt-0">
-                    <img src={project.image} alt={project.title} className="max-w-full max-h-full object-contain rounded-xl" loading="lazy" />
-                  </div>
-                </div>
-              ) : (
-                <div className="work-content-odd glass-card flex flex-col justify-between w-full lg:w-[45vw] lg:max-w-[500px] h-auto lg:h-[70vh] p-6 lg:p-10 gap-6 lg:gap-0">
-                  <div className="work-img-wrapper w-full h-[220px] lg:h-[350px] flex items-center justify-center overflow-hidden rounded-xl mb-4 lg:mb-0">
-                    <img src={project.image} alt={project.title} className="max-w-full max-h-full object-contain rounded-xl" loading="lazy" />
-                  </div>
-                  <div className="work-text-block flex flex-col gap-4 lg:gap-8">
-                    <div className="work-header-row flex justify-between items-start w-full">
-                      <span className="work-num text-5xl lg:text-8xl font-bold leading-none text-white">{num}</span>
-                      <div className="work-title-group text-right flex flex-col items-end">
-                        <h4 className="work-title text-2xl lg:text-3xl font-semibold mb-2 text-white">{project.title}</h4>
-                        <span className="work-cat text-sm lg:text-base text-gray-400">{project.category}</span>
-                      </div>
-                    </div>
-                    <div className="work-tools flex flex-col gap-2">
-                      <span className="tools-label text-lg lg:text-2xl font-semibold text-white">Tools and features</span>
-                      <p className="tools-list text-sm lg:text-base text-gray-500 leading-relaxed">{project.technologies}</p>
-                    </div>
-                  </div>
-                </div>
-              )}
-              {index < displayProjects.length - 1 && (
-                <div className="work-vert-divider w-full lg:w-[1px] h-[1px] lg:h-[60vh] bg-white/10 my-8 lg:my-0 lg:mx-8"></div>
-              )}
-            </div>
-          );
-        })}
+    <div className="work-section-alt career-section relative min-h-screen bg-[#09060d] py-16 md:py-24 flex items-center" id="work">
+      <div className="section-container w-full max-w-[1300px] mx-auto px-6 flex flex-col lg:flex-row gap-12 items-center justify-between">
         
+        {/* Left Side: Header & Controls */}
+        <div className="w-full lg:w-[35%] flex flex-col items-start gap-8">
+          <div className="header-group">
+            <h2 className="font-anton text-6xl md:text-8xl font-normal leading-none tracking-wider text-white uppercase m-0">
+              MY
+              <br />
+              <span className="text-[#c697ff]">WORK</span>
+            </h2>
+            <p className="font-roboto text-sm md:text-base text-gray-400 mt-4 leading-relaxed max-w-[320px]">
+              Exploring creative designs, complex full-stack apps, and intelligent AI models.
+            </p>
+          </div>
+
+          {/* Navigation Controls */}
+          <div className="flex items-center gap-6 mt-2">
+            <button
+              onClick={handlePrev}
+              className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center text-white bg-white/5 hover:bg-white/10 hover:border-[#c697ff]/40 transition duration-300 cursor-pointer"
+              aria-label="Previous Project"
+            >
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <line x1="19" y1="12" x2="5" y2="12"></line>
+                <polyline points="12 19 5 12 12 5"></polyline>
+              </svg>
+            </button>
+            <button
+              onClick={handleNext}
+              className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center text-white bg-white/5 hover:bg-white/10 hover:border-[#c697ff]/40 transition duration-300 cursor-pointer"
+              aria-label="Next Project"
+            >
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </button>
+
+            {/* Pagination Numbers */}
+            <span className="font-roboto text-sm text-gray-500 tracking-wider">
+              <span className="text-white font-bold">{num}</span> / {projects.length.toString().padStart(2, "0")}
+            </span>
+          </div>
+
+          {/* Pagination Indicators (Dots) */}
+          <div className="flex items-center gap-2">
+            {projects.map((_, idx) => (
+              <button
+                key={idx}
+                onClick={() => {
+                  setDirection(idx > currentIndex ? 1 : -1);
+                  setCurrentIndex(idx);
+                }}
+                className={`h-1.5 rounded-full transition-all duration-300 cursor-pointer ${
+                  idx === currentIndex ? "w-6 bg-[#c697ff]" : "w-1.5 bg-white/20 hover:bg-white/40"
+                }`}
+                aria-label={`Go to slide ${idx + 1}`}
+              />
+            ))}
+          </div>
         </div>
+
+        {/* Right Side: Active Project Card Slider */}
+        <div className="w-full lg:w-[60%] flex items-center justify-center relative min-h-[550px] lg:min-h-[600px] overflow-hidden rounded-2xl">
+          <AnimatePresence initial={false} custom={direction} mode="wait">
+            <motion.div
+              key={currentIndex}
+              custom={direction}
+              variants={slideVariants}
+              initial="enter"
+              animate="center"
+              exit="exit"
+              className="glass-card flex flex-col justify-between w-full max-w-[620px] p-8 md:p-12 gap-8 border border-white/5 bg-white/[0.02] backdrop-blur-xl rounded-2xl"
+            >
+              <div className="flex flex-col gap-6">
+                {/* Header Row */}
+                <div className="flex justify-between items-start w-full">
+                  <span className="text-6xl md:text-8xl font-bold font-anton leading-none text-white/10 select-none">{num}</span>
+                  <div className="text-right flex flex-col items-end">
+                    <h4 className="text-2xl md:text-3.5xl font-bold text-white tracking-wide">{currentProject.title}</h4>
+                    <span className="text-xs md:text-sm uppercase tracking-widest text-[#c697ff] mt-1 font-semibold">{currentProject.category}</span>
+                  </div>
+                </div>
+
+                {/* Description */}
+                <p className="text-sm md:text-base text-gray-300 leading-relaxed font-roboto">
+                  {currentProject.description}
+                </p>
+
+                {/* Tools */}
+                <div className="flex flex-col gap-2 border-t border-white/5 pt-6">
+                  <span className="text-xs uppercase tracking-widest text-gray-500 font-bold">Tools and features</span>
+                  <p className="text-sm md:text-base text-gray-400 font-semibold leading-relaxed">{currentProject.technologies}</p>
+                </div>
+              </div>
+
+              {/* Image Preview */}
+              <div className="w-full h-[220px] md:h-[280px] flex items-center justify-center overflow-hidden rounded-xl border border-white/5 bg-black/40">
+                <img
+                  src={currentProject.image}
+                  alt={currentProject.title}
+                  className="max-w-full max-h-full object-contain rounded-xl select-none"
+                  loading="eager"
+                />
+              </div>
+            </motion.div>
+          </AnimatePresence>
+        </div>
+
       </div>
     </div>
   );
