@@ -1,4 +1,5 @@
 import React from "react";
+import { motion } from "framer-motion";
 import { config } from "./config";
 import { useNavigate } from "react-router-dom";
 
@@ -9,68 +10,114 @@ export const Contact: React.FC = () => {
     navigate("/play");
   };
 
-  return (
-    <div className="contact-section" id="contact">
-      <div className="contact-container">
-        <h3>
-          Want to build
-          <br />
-          <span style={{ color: "var(--accentColor)" }}>something cool?</span>
-        </h3>
+  const socials = [
+    { name: "GITHUB", url: config.social.github ? `https://github.com/${config.social.github}` : config.contact.github, desc: "Explore Open Source Code", color: "#c697ff" },
+    { name: "LINKEDIN", url: config.contact.linkedin, desc: "Connect Professionally", color: "#c084fc" },
+    { name: "TWITTER", url: config.contact.twitter, desc: "See Tech Thoughts", color: "#a78bfa" },
+    { name: "INSTAGRAM", url: config.contact.instagram, desc: "Behind the Scenes", color: "#ddd6fe" }
+  ];
 
-        {/* Dynamic call to actions */}
-        <div className="cta-section" style={{ padding: "0 0 80px 0", justifyContent: "flex-start" }}>
-          <div className="cta-buttons">
-            <button className="cta-btn cta-btn-play" onClick={handleTalkClick} data-cursor="disable">
+  return (
+    <div className="contact-section relative py-20 md:py-28 overflow-hidden bg-[#09060d]" id="contact">
+      {/* Cinematic backdrop glow */}
+      <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] rounded-full bg-purple-500/5 blur-[150px] pointer-events-none select-none" />
+
+      <div className="contact-container w-full max-w-[1300px] mx-auto px-6 flex flex-col gap-16">
+        
+        {/* Large Cinematic Header Card */}
+        <motion.div 
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="glass-card p-10 md:p-14 border border-white/5 bg-white/[0.01] backdrop-blur-xl rounded-2xl flex flex-col md:flex-row justify-between items-center gap-8 w-full"
+        >
+          <div className="flex flex-col items-start gap-4">
+            <p className="font-roboto text-xs md:text-sm text-[#c697ff] uppercase tracking-[0.2em] font-semibold">Have a concept?</p>
+            <h3 className="font-anton text-5xl md:text-7xl font-normal leading-none tracking-wider text-white uppercase m-0">
+              WANT TO BUILD
+              <br />
+              <span className="text-[#c697ff]">SOMETHING COOL?</span>
+            </h3>
+          </div>
+
+          <div className="flex flex-wrap gap-4 items-center">
+            <button 
+              className="px-8 py-4 rounded-full border border-[#c697ff]/40 bg-[#c697ff]/10 hover:bg-[#c697ff]/20 text-white font-bold text-sm tracking-wider transition-all duration-300 shadow-[0_0_20px_rgba(198,151,255,0.15)] hover:shadow-[0_0_25px_rgba(198,151,255,0.3)] hover:scale-105 cursor-pointer"
+              onClick={handleTalkClick} 
+              data-cursor="disable"
+            >
               💬 TALK WITH ME
             </button>
-            <a className="cta-btn cta-btn-hire" href={`mailto:${config.contact.email}`} data-cursor="disable">
+            <a 
+              className="px-8 py-4 rounded-full bg-white hover:bg-[#c697ff] text-black hover:text-white font-bold text-sm tracking-wider transition-all duration-300 hover:scale-105"
+              href={`mailto:${config.contact.email}`} 
+              data-cursor="disable"
+            >
               ✉️ HIRE ME
             </a>
           </div>
-        </div>
+        </motion.div>
 
-        <div className="contact-flex">
-          {/* Email / Connection details */}
-          <div className="contact-box">
-            <h4>Get in Touch</h4>
-            <p>
-              <a href={`mailto:${config.contact.email}`} data-cursor="disable" style={{ color: "var(--textColor)" }}>
-                {config.contact.email}
-              </a>
-            </p>
+        {/* Lower Links Row */}
+        <div className="flex flex-col lg:flex-row justify-between gap-12 w-full pt-4">
+          
+          {/* Connection Channels column */}
+          <div className="flex flex-col w-full lg:w-[45%] gap-6">
+            <div className="flex flex-col gap-2">
+              <h4 className="text-xs uppercase tracking-widest text-gray-500 font-bold">Email Address</h4>
+              <p>
+                <a 
+                  href={`mailto:${config.contact.email}`} 
+                  data-cursor="disable" 
+                  className="text-lg md:text-xl font-semibold text-white hover:text-[#c697ff] transition duration-300"
+                >
+                  {config.contact.email}
+                </a>
+              </p>
+            </div>
 
-            <h4>Social Channels</h4>
-            <div style={{ display: "flex", flexDirection: "column" }}>
-              <a className="contact-social" href={config.contact.github} target="_blank" rel="noopener noreferrer" data-cursor="disable">
-                GITHUB
-              </a>
-              <a className="contact-social" href={config.contact.linkedin} target="_blank" rel="noopener noreferrer" data-cursor="disable">
-                LINKEDIN
-              </a>
-              <a className="contact-social" href={config.contact.twitter} target="_blank" rel="noopener noreferrer" data-cursor="disable">
-                TWITTER
-              </a>
-              <a className="contact-social" href={config.contact.instagram} target="_blank" rel="noopener noreferrer" data-cursor="disable">
-                INSTAGRAM
-              </a>
+            <div className="flex flex-col gap-4 mt-4">
+              <h4 className="text-xs uppercase tracking-widest text-gray-500 font-bold">Social Channels</h4>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {socials.map((social, idx) => (
+                  <a 
+                    key={idx}
+                    href={social.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    data-cursor="disable"
+                    className="glass-card p-4 flex flex-col gap-1 border border-white/5 bg-white/[0.02] hover:bg-white/[0.05] hover:border-[#c697ff]/30 transition duration-300 rounded-xl"
+                  >
+                    <span className="text-sm font-bold text-white tracking-wide" style={{ color: social.color }}>
+                      {social.name}
+                    </span>
+                    <span className="text-xs text-gray-400 font-roboto">
+                      {social.desc}
+                    </span>
+                  </a>
+                ))}
+              </div>
             </div>
           </div>
 
-          {/* Copyright and signature details */}
-          <div className="contact-box" style={{ alignItems: "flex-end", justifyContent: "flex-end", textAlign: "right" }}>
-            <h2>
-              Nishkarsh
+          {/* Copyright column */}
+          <div className="flex flex-col justify-end items-start lg:items-end text-left lg:text-right w-full lg:w-[40%] gap-4">
+            <h2 className="font-anton text-4xl md:text-6xl font-normal leading-none tracking-wider text-white uppercase m-0 select-none">
+              NISHKARSH
               <br />
-              <span>Sharma</span>
+              <span className="text-[#c697ff]">SHARMA</span>
             </h2>
-            <h5>
+            <p className="text-xs md:text-sm text-gray-500 font-semibold tracking-wide font-roboto">
               Designed & Coded with passion © {new Date().getFullYear()}
-            </h5>
+            </p>
           </div>
+
         </div>
+
       </div>
     </div>
   );
 };
+
 export default Contact;
