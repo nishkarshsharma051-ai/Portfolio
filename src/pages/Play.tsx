@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Chess } from "chess.js";
 import type { Square } from "chess.js";
 import Cursor from "../components/Cursor";
+import { config } from "../components/config";
 
 // --- Chess Piece SVG Vectors ---
 const PieceSVG: React.FC<{ type: string; color: string }> = ({ type, color }) => {
@@ -229,23 +230,29 @@ const minimax = (
 const chatbotAnswers: { triggers: string[]; response: string }[] = [
   {
     triggers: ["hi", "hello", "hey", "hola"],
-    response: "Hello there! Welcome to my digital corner. I'm Nishkarsh. How can I help you today? Feel free to ask about my skills, projects, studies at IIT Madras, or let's play a chess match!",
+    response: `Hello there! Welcome to my digital corner. I'm ${config.developer.name}. How can I help you today? Feel free to ask about my skills, projects, studies, career, or let's play a chess match!`,
   },
   {
-    triggers: ["skills", "technologies", "languages", "stack"],
-    response: "My technical arsenal includes Python, C++, React, Node.js, Next.js, and TypeScript. In the AI domain, I work heavily with PyTorch, TensorFlow, LLMs, NLP, and Deep Learning algorithms.",
+    triggers: ["skills", "technologies", "languages", "stack", "tech"],
+    response: `My technical expertise spans multiple domains:\n\n` +
+      `• **${config.skills.develop.title}**: ${config.skills.develop.tools.join(", ")}\n` +
+      `• **${config.skills.design.title}**: ${config.skills.design.tools.join(", ")}`,
   },
   {
-    triggers: ["project", "work", "accomplishment", "drishti", "votechain"],
-    response: "I have built several high-performance projects, including 'Drishti' (an advanced NLP/LLM chatbot), 'VoteChain' (a decentralized voting system on Ethereum), and 'EIE' (an Arduino IoT Earthquake Estimator). Feel free to ask about any specific project!",
+    triggers: ["project", "work", "accomplishment", "projects"],
+    response: `I have built several high-performance projects, including:\n\n` +
+      config.projects.map(p => `• **${p.title}** (${p.category}): ${p.description} (Built using: ${p.technologies})`).join("\n\n") +
+      `\n\nFeel free to ask about any specific project details!`,
   },
   {
-    triggers: ["iit", "madras", "education", "college", "university"],
-    response: "I am currently pursuing my degree in Data Science and Applications at the prestigious IIT Madras, focusing deeply on advanced machine learning algorithms, database systems, and data analytics.",
+    triggers: ["career", "experience", "timeline", "history", "jobs", "job", "hire", "freelance", "opportunity", "contract"],
+    response: `Here is a summary of my professional journey:\n\n` +
+      config.experiences.map(exp => `• **${exp.position}** at *${exp.company}* (${exp.period}): ${exp.description}\n  *Key Tech*: ${exp.technologies.join(", ")}`).join("\n\n") +
+      `\n\nI'm always open to exciting opportunities in AI Engineering and Full-Stack roles! Drop me an email at ${config.contact.email} and we can discuss how I can bring value to your team.`,
   },
   {
-    triggers: ["job", "hire", "freelance", "opportunity", "contract"],
-    response: "I'm always open to exciting opportunities in AI Engineering and Full-Stack roles! Drop me an email at nishkarshsharma051@gmail.com and we can discuss how I can bring value to your team.",
+    triggers: ["iit", "madras", "education", "college", "university", "studies"],
+    response: `I am a B.Tech CSE student passionate about Full-Stack Development and AI. I am also pursuing my degree in Data Science and Applications at the prestigious IIT Madras, focusing deeply on advanced machine learning algorithms, database systems, and data analytics.`,
   },
   {
     triggers: ["chess", "elo", "play"],
