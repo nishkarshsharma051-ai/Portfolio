@@ -46,17 +46,17 @@ export const MyWorks: React.FC = () => {
   return (
     <div className="reference-page">
       <Cursor />
-      <div className="work-section-horizontal career-section" id="work" ref={workRef} style={{ position: "relative", height: "100vh", overflow: "hidden" }}>
-        <div style={{ position: "absolute", top: "15vh", left: "5vw", zIndex: 10, width: "20vw" }}>
-          <h2 style={{ fontSize: "5rem", fontWeight: 700, lineHeight: 1.1, margin: 0, letterSpacing: "0.05em", cursor: "pointer" }} onClick={() => navigate("/")}>
+      <div className="work-section-horizontal career-section myworks-main-container" id="work" ref={workRef}>
+        <div className="myworks-title-sidebar">
+          <h2 className="myworks-title-text" onClick={() => navigate("/")}>
             MY
             <br />
             <span style={{ color: "#c697ff" }}>WORK</span>
           </h2>
         </div>
         
-        <div style={{ marginLeft: "25vw", width: "75vw", height: "100%", overflow: "hidden" }}>
-          <div className="work-flex-alt" style={{ paddingLeft: "2rem", paddingRight: "5vw" }}>
+        <div className="myworks-slider-wrapper">
+          <div className="work-flex-alt">
             {config.projects.map((project, index) => {
               const num = (index + 1).toString().padStart(2, "0");
               const isEven = index % 2 === 0;

@@ -206,5 +206,94 @@
   }
 }
 
+/* ── Premium Layout Classes for Desktop ── */
+.myworks-main-container {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+}
+.myworks-title-sidebar {
+  position: absolute;
+  top: 15vh;
+  left: 5vw;
+  z-index: 10;
+  width: 20vw;
+}
+.myworks-title-text {
+  font-size: 5rem;
+  font-weight: 700;
+  line-height: 1.1;
+  margin: 0;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+}
+.myworks-slider-wrapper {
+  margin-left: 25vw;
+  width: 75vw;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* ── Responsive Overrides for Mobile ── */
+@media (max-width: 768px) {
+  .myworks-main-container {
+    position: relative !important;
+    height: auto !important;
+    overflow: visible !important;
+    padding: 80px 24px 40px !important;
+  }
+  .myworks-title-sidebar {
+    position: static !important;
+    width: 100% !important;
+    margin-bottom: 40px !important;
+  }
+  .myworks-title-text {
+    font-size: clamp(3rem, 10vw, 4.5rem) !important;
+    line-height: 1 !important;
+  }
+  .myworks-slider-wrapper {
+    margin-left: 0 !important;
+    width: 100% !important;
+    height: auto !important;
+    overflow: visible !important;
+  }
+  .work-flex-alt {
+    flex-direction: column !important;
+    width: 100% !important;
+    height: auto !important;
+    padding: 0 !important;
+    gap: 40px !important;
+  }
+  .work-column-alt {
+    flex-direction: column !important;
+    width: 100% !important;
+    height: auto !important;
+    margin-bottom: 0 !important;
+  }
+  .work-content-even, .work-content-odd {
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+    padding: 32px 24px !important;
+    box-sizing: border-box !important;
+    gap: 20px !important;
+    background: var(--cardBackground) !important;
+    border: 1px solid var(--borderNeon) !important;
+    border-radius: 16px !important;
+  }
+  .work-img-wrapper {
+    height: 220px !important;
+    width: 100% !important;
+    margin-top: 10px !important;
+    margin-bottom: 10px !important;
+  }
+  .work-vert-divider {
+    width: 100% !important;
+    height: 1px !important;
+    margin: 40px 0 !important;
+    background-color: rgba(255, 255, 255, 0.08) !important;
+  }
+}
+
 
 
