@@ -22,7 +22,7 @@ function App() {
       touchMultiplier: 2,
     });
 
-    (window as any).lenis = lenis;
+    ((window as unknown) as { lenis: Lenis }).lenis = lenis;
 
     lenis.on("scroll", ScrollTrigger.update);
 

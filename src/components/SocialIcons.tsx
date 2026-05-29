@@ -14,7 +14,7 @@ export const SocialIcons: React.FC = () => {
 
       const rect = span.getBoundingClientRect();
       const mid = { x: rect.width / 2, y: rect.height / 2 };
-      let cur = { x: mid.x, y: mid.y };
+      const cur = { x: mid.x, y: mid.y };
 
       const onMouseMove = (e: MouseEvent) => {
         const spanRect = span.getBoundingClientRect();

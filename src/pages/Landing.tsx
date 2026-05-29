@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from "react";
+import type Lenis from "lenis";
 import { useNavigate } from "react-router-dom";
 import Home from "./Home";
 
@@ -125,7 +126,7 @@ const Landing: React.FC = () => {
 
     let lenisTimer: number;
     const stopLenis = () => {
-      const lenis = (window as any).lenis;
+      const lenis = ((window as unknown) as { lenis: Lenis }).lenis;
       if (lenis) {
         lenis.stop();
       } else {
@@ -138,7 +139,7 @@ const Landing: React.FC = () => {
       document.body.classList.remove("lock-scroll");
       document.documentElement.classList.remove("lock-scroll");
       cancelAnimationFrame(lenisTimer);
-      const lenis = (window as any).lenis;
+      const lenis = ((window as unknown) as { lenis: Lenis }).lenis;
       if (lenis) {
         lenis.start();
       }

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import type { Variants } from "framer-motion";
 import { config } from "./config";
 import "../myworks.css";
 
@@ -22,7 +23,7 @@ export const WorkHorizontal: React.FC = () => {
   const currentProject = projects[currentIndex];
   const num = (currentIndex + 1).toString().padStart(2, "0");
 
-  const slideVariants: any = {
+  const slideVariants: Variants = {
     enter: (dir: number) => ({
       x: dir > 0 ? 80 : -80,
       opacity: 0,

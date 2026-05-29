@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from "react";
+import type Lenis from "lenis";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Cursor from "../components/Cursor";
@@ -56,7 +57,7 @@ export const Home: React.FC = () => {
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, target: string) => {
     e.preventDefault();
-    const lenis = (window as any).lenis;
+    const lenis = ((window as unknown) as { lenis: Lenis }).lenis;
     if (lenis) {
       lenis.scrollTo(target, { offset: 0, duration: 1.5 });
     } else {

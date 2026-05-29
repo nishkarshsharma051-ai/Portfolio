@@ -27,7 +27,7 @@ export const Navbar: React.FC = () => {
     });
 
     lenis.stop(); // Stop scrolling during loading screen (we'll start it after loading completes)
-    (window as any).lenis = lenis;
+    ((window as unknown) as { lenis: Lenis }).lenis = lenis;
 
     const raf = (time: number) => {
       lenis.raf(time);

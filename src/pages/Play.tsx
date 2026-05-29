@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { Chess } from "chess.js";
-import type { Square } from "chess.js";
+import type { Square, Move } from "chess.js";
 import Cursor from "../components/Cursor";
 import { config } from "../components/config";
 
@@ -187,7 +187,7 @@ const minimax = (
   alpha: number,
   beta: number,
   isMaximizing: boolean
-): { score: number; move: any } => {
+): { score: number; move: Move | null } => {
   if (depth === 0 || chess.isGameOver()) {
     return { score: evaluateBoard(chess), move: null };
   }
