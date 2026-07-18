@@ -12,7 +12,7 @@ export const Contact: React.FC = () => {
 
   const socials = [
     { name: "GITHUB", url: config.social.github ? `https://github.com/${config.social.github}` : config.contact.github, desc: "Explore Open Source Code", color: "#c697ff" },
-    { name: "LINKEDIN", url: config.contact.linkedin, desc: "Connect Professionally", color: "#c084fc" },
+    { name: "LINKEDIN", url: config.contact.linkedin, desc: "Connect Professionally", color: "#e0e0e0" },
     { name: "TWITTER", url: config.contact.twitter, desc: "See Tech Thoughts", color: "#a78bfa" },
     { name: "INSTAGRAM", url: config.contact.instagram, desc: "Behind the Scenes", color: "#ddd6fe" }
   ];
@@ -20,7 +20,7 @@ export const Contact: React.FC = () => {
   return (
     <div className="contact-section relative py-20 md:py-28 overflow-hidden bg-[#09060d]" id="contact">
       {/* Cinematic backdrop glow */}
-      <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] rounded-full bg-purple-500/5 blur-[150px] pointer-events-none select-none" />
+      <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] rounded-full bg-white/5 blur-[150px] pointer-events-none select-none" />
 
       <div className="contact-container w-full max-w-[1300px] mx-auto px-6 flex flex-col gap-16">
         
@@ -43,7 +43,7 @@ export const Contact: React.FC = () => {
 
           <div className="flex flex-wrap gap-4 items-center">
             <button 
-              className="contact-cta-btn px-12 py-5 rounded-full border border-[#c697ff]/40 bg-[#c697ff]/10 hover:bg-[#c697ff]/20 text-white font-bold text-sm tracking-wider transition-all duration-300 shadow-[0_0_20px_rgba(198,151,255,0.15)] hover:shadow-[0_0_25px_rgba(198,151,255,0.3)] hover:scale-105 cursor-pointer flex items-center justify-center gap-3"
+              className="contact-cta-btn px-12 py-5 rounded-full border border-[#ffffff]/40 bg-[#ffffff]/10 hover:bg-[#ffffff]/20 text-white font-bold text-sm tracking-wider transition-all duration-300 shadow-[0_0_20px_rgba(255,255,255,0.15)] hover:shadow-[0_0_25px_rgba(255,255,255,0.3)] hover:scale-105 cursor-pointer flex items-center justify-center gap-3"
               onClick={handleTalkClick} 
               data-cursor="disable"
             >

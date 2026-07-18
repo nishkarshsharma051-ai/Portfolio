@@ -4,7 +4,7 @@ import { config } from "./config";
 
 const stats = [
   { value: "04+", label: "Years Exploring Code", color: "#c697ff" },
-  { value: "10+", label: "Advanced Toolsets", color: "#c084fc" },
+  { value: "10+", label: "Advanced Toolsets", color: "#e0e0e0" },
   { value: "07+", label: "AI & Full-Stack Apps", color: "#a78bfa" },
   { value: "100%", label: "Passion for Tech", color: "#ddd6fe" }
 ];
@@ -13,7 +13,7 @@ export const About: React.FC = () => {
   return (
     <div className="about-section relative py-20 md:py-28 overflow-hidden bg-[#09060d]" id="about">
       {/* Cinematic Blur Backdrop Blobs */}
-      <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-[350px] h-[350px] rounded-full bg-purple-500/10 blur-[120px] pointer-events-none select-none" />
+      <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-[350px] h-[350px] rounded-full bg-white/10 blur-[120px] pointer-events-none select-none" />
 
       <div className="section-container w-full max-w-[1300px] mx-auto px-6">
         <div className="flex flex-col lg:flex-row gap-12 items-center justify-between">

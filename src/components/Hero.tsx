@@ -74,9 +74,9 @@ export const Hero: React.FC = () => {
       draw(c: CanvasRenderingContext2D) {
         c.beginPath();
         c.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-        c.fillStyle = "rgba(194, 164, 255, 0.6)";
-        c.shadowBlur = 8;
-        c.shadowColor = "#c2a4ff";
+        c.fillStyle = "rgba(255, 255, 255, 0.6)";
+        c.shadowBlur = 15;
+        c.shadowColor = "#ffffff";
         c.fill();
         c.shadowBlur = 0; // reset shadow
       }
@@ -110,7 +110,7 @@ export const Hero: React.FC = () => {
             gl.beginPath();
             gl.moveTo(particles[i].x, particles[i].y);
             gl.lineTo(particles[j].x, particles[j].y);
-            gl.strokeStyle = `rgba(194, 164, 255, ${alpha})`;
+            gl.strokeStyle = `rgba(255, 255, 255, ${alpha})`;
             gl.lineWidth = 1;
             gl.stroke();
           }

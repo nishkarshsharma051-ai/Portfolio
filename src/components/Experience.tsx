@@ -82,7 +82,7 @@ export const Experience: React.FC = () => {
                   <ul className="career-responsibilities" style={{ marginTop: "15px", listStyleType: "none", paddingLeft: "0" }}>
                     {exp.responsibilities.map((resp, rIdx) => (
                       <li key={rIdx} style={{ fontSize: "14px", color: "#b3aab9", marginBottom: "8px", display: "flex", alignItems: "flex-start" }}>
-                        <span style={{ color: "#c2a4ff", marginRight: "10px" }}>•</span>
+                        <span style={{ color: "#ffffff", marginRight: "10px" }}>•</span>
                         <span>{resp}</span>
                       </li>
                     ))}

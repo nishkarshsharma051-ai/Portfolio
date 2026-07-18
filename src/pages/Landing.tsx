@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import Home from "./Home";
 
 // ─── Cloth config ──────────────────────────────────────────────────────────
-const CLOTH_COLOR    = "#e8e2d9";   // solid warm linen
+const CLOTH_COLOR    = "#0a0a0a";   // deep onyx base
 let GRAVITY          = 1200.0;       // original heavy fluid gravity
 const DAMPING        = 0.99;
 const MOUSE_PULL_R   = 20;           // fluid pull radius
@@ -284,7 +284,7 @@ const Landing: React.FC = () => {
             ctx.lineTo(nx(d), ny(d));
             ctx.lineTo(nx(c), ny(c));
             ctx.closePath();
-            ctx.fillStyle = "#2a1f40"; // Dark elegant purple for the cloth
+            ctx.fillStyle = "#141414"; // Subtle contrast tile for the woven look
             ctx.fill();
           }
         }
@@ -315,19 +315,19 @@ const Landing: React.FC = () => {
       const isMobile = W < 768;
 
       // Title - scale down nicely on mobile
-      ctx.fillStyle = "rgba(255,255,255,0.9)";
+      ctx.fillStyle = "rgba(255, 255, 255, 0.95)";
       const titleSize = isMobile ? Math.max(20, Math.min(W * 0.06, 32)) : Math.max(32, Math.min(W * 0.05, 64)); 
       ctx.font = `800 ${titleSize}px Geist, sans-serif`;
       ctx.fillText("This is a tearable page.", W / 2, H / 2 - 20 + dropY);
       
       // Subtitle - scale down nicely on mobile
       const subSize = isMobile ? Math.max(12, Math.min(W * 0.035, 14)) : Math.max(16, Math.min(W * 0.02, 19));
-      ctx.fillStyle = "rgba(255,255,255,0.6)";
+      ctx.fillStyle = "rgba(255, 255, 255, 0.6)";
       ctx.font = `500 ${subSize}px Geist, sans-serif`;
       ctx.fillText("To know about Nishkarsh Sharma, tear this.", W / 2, H / 2 + 25 + dropY);
  
       // Instructions - use short mobile-friendly copy
-      ctx.fillStyle = "rgba(255,255,255,0.35)";
+      ctx.fillStyle = "rgba(255, 255, 255, 0.3)";
       ctx.font = `500 ${isMobile ? 9 : 11}px Geist, sans-serif`;
       ctx.letterSpacing = "2px";
       const instructionText = isMobile 
@@ -389,7 +389,7 @@ const Landing: React.FC = () => {
         <div style={{ pointerEvents: "none" }}>
           <div style={{ height: 3, background: "rgba(255,255,255,0.05)", width: "100%" }}>
             <div ref={barRef} style={{
-              height: "100%", width: "0%", background: "rgba(194, 164, 255, 0.8)",
+              height: "100%", width: "0%", background: "rgba(255, 255, 255, 0.8)",
               transition: "width 0.1s linear"
             }} />
           </div>

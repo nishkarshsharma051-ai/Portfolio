@@ -181,7 +181,7 @@ export const Home: React.FC = () => {
       <main className="reference-main">
         <section className="reference-hero min-h-screen flex items-center justify-between px-6 md:px-24 py-20 md:py-0">
           <div className="reference-hero-left flex flex-col items-start gap-2 z-10 w-full">
-            <p className="font-roboto text-purple-300/60 text-sm md:text-2xl uppercase tracking-[0.2em]">Hello! I&apos;m</p>
+            <p className="font-roboto text-gray-300/60 text-sm md:text-2xl uppercase tracking-[0.2em]">Hello! I&apos;m</p>
             <h1 className="font-anton text-[13vw] md:text-[8.5rem] font-normal leading-[0.85] tracking-wide text-white uppercase mb-8 drop-shadow-[0_10px_30px_rgba(0,0,0,0.5)]">
               {config.developer.fullName.split(" ")[0].toUpperCase()}
               <br />
@@ -193,8 +193,8 @@ export const Home: React.FC = () => {
             </h1>
 
             <div className="flex flex-col items-start gap-1 w-full">
-              <p className="font-roboto text-purple-300/60 text-xs md:text-xl uppercase tracking-[0.2em]">An</p>
-              <h2 className="font-anton text-[8.5vw] md:text-[5.5rem] font-normal leading-[0.85] tracking-wide text-[#c084fc] uppercase drop-shadow-[0_0_20px_rgba(192,132,252,0.4)]">
+              <p className="font-roboto text-gray-300/60 text-xs md:text-xl uppercase tracking-[0.2em]">An</p>
+              <h2 className="font-anton text-[8.5vw] md:text-[5.5rem] font-normal leading-[0.85] tracking-wide text-[#e0e0e0] uppercase drop-shadow-[0_0_20px_rgba(255,255,255,0.4)]">
                 AI ENGINEER
               </h2>
               <h3 className="font-anton text-[8.2vw] md:text-[5.2rem] font-normal leading-[0.85] tracking-wide text-white uppercase">
