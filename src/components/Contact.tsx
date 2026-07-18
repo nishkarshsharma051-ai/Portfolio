@@ -11,10 +11,10 @@ export const Contact: React.FC = () => {
   };
 
   const socials = [
-    { name: "GITHUB", url: config.social.github ? `https://github.com/${config.social.github}` : config.contact.github, desc: "Explore Open Source Code", color: "#c697ff" },
+    { name: "GITHUB", url: config.social.github ? `https://github.com/${config.social.github}` : config.contact.github, desc: "Explore Open Source Code", color: "#e0e0e0" },
     { name: "LINKEDIN", url: config.contact.linkedin, desc: "Connect Professionally", color: "#e0e0e0" },
-    { name: "TWITTER", url: config.contact.twitter, desc: "See Tech Thoughts", color: "#a78bfa" },
-    { name: "INSTAGRAM", url: config.contact.instagram, desc: "Behind the Scenes", color: "#ddd6fe" }
+    { name: "TWITTER", url: config.contact.twitter, desc: "See Tech Thoughts", color: "#cccccc" },
+    { name: "INSTAGRAM", url: config.contact.instagram, desc: "Behind the Scenes", color: "#f0f0f0" }
   ];
 
   return (
@@ -33,11 +33,11 @@ export const Contact: React.FC = () => {
           className="flex flex-col md:flex-row justify-between items-start md:items-center gap-8 w-full border-b border-white/5 pb-12"
         >
           <div className="flex flex-col items-start gap-4">
-            <p className="font-roboto text-xs md:text-sm text-[#c697ff] uppercase tracking-[0.2em] font-semibold">Have a concept?</p>
+            <p className="font-roboto text-xs md:text-sm text-[#e0e0e0] uppercase tracking-[0.2em] font-semibold">Have a concept?</p>
             <h3 className="font-anton text-5xl md:text-7xl font-normal leading-none tracking-wider text-white uppercase m-0">
               WANT TO BUILD
               <br />
-              <span className="text-[#c697ff]">SOMETHING COOL?</span>
+              <span className="text-[#e0e0e0]">SOMETHING COOL?</span>
             </h3>
           </div>
 
@@ -50,7 +50,7 @@ export const Contact: React.FC = () => {
               <span className="text-base">💬</span> <span className="leading-none">TALK WITH ME</span>
             </button>
             <a 
-              className="contact-cta-btn px-12 py-5 rounded-full bg-white hover:bg-[#c697ff] text-black hover:text-white font-bold text-sm tracking-wider transition-all duration-300 hover:scale-105 flex items-center justify-center gap-3"
+              className="contact-cta-btn px-12 py-5 rounded-full bg-white hover:bg-[#e0e0e0] text-black hover:text-white font-bold text-sm tracking-wider transition-all duration-300 hover:scale-105 flex items-center justify-center gap-3"
               href={`mailto:${config.contact.email}`} 
               data-cursor="disable"
             >
@@ -70,7 +70,7 @@ export const Contact: React.FC = () => {
                 <a 
                   href={`mailto:${config.contact.email}`} 
                   data-cursor="disable" 
-                  className="text-xl md:text-2xl font-semibold text-white hover:text-[#c697ff] transition duration-300"
+                  className="text-xl md:text-2xl font-semibold text-white hover:text-[#e0e0e0] transition duration-300"
                 >
                   {config.contact.email}
                 </a>
@@ -106,7 +106,7 @@ export const Contact: React.FC = () => {
             <h2 className="font-anton text-4xl md:text-6xl font-normal leading-none tracking-wider text-white uppercase m-0 select-none">
               NISHKARSH
               <br />
-              <span className="text-[#c697ff]">SHARMA</span>
+              <span className="text-[#e0e0e0]">SHARMA</span>
             </h2>
             <p className="text-xs md:text-sm text-gray-500 font-semibold tracking-wide font-roboto">
               Designed & Coded with passion © {new Date().getFullYear()}

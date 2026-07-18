@@ -51,7 +51,7 @@ export const MyWorks: React.FC = () => {
           <h2 className="myworks-title-text" onClick={() => navigate("/")}>
             MY
             <br />
-            <span style={{ color: "#c697ff" }}>WORK</span>
+            <span style={{ color: "#e0e0e0" }}>WORK</span>
           </h2>
         </div>
         

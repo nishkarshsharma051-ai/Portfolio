@@ -59,7 +59,7 @@ export const WorkHorizontal: React.FC = () => {
             <h2 className="font-anton text-6xl md:text-8xl font-normal leading-none tracking-wider text-white uppercase m-0">
               MY
               <br />
-              <span className="text-[#c697ff]">WORK</span>
+              <span className="text-[#e0e0e0]">WORK</span>
             </h2>
             <p className="font-roboto text-sm md:text-base text-gray-400 mt-4 leading-relaxed max-w-[320px]">
               Exploring creative designs, complex full-stack apps, and intelligent AI models.
@@ -70,7 +70,7 @@ export const WorkHorizontal: React.FC = () => {
           <div className="flex items-center gap-6 mt-2">
             <button
               onClick={handlePrev}
-              className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center text-white bg-white/5 hover:bg-white/10 hover:border-[#c697ff]/40 transition duration-300 cursor-pointer"
+              className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center text-white bg-white/5 hover:bg-white/10 hover:border-[#e0e0e0]/40 transition duration-300 cursor-pointer"
               aria-label="Previous Project"
             >
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -80,7 +80,7 @@ export const WorkHorizontal: React.FC = () => {
             </button>
             <button
               onClick={handleNext}
-              className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center text-white bg-white/5 hover:bg-white/10 hover:border-[#c697ff]/40 transition duration-300 cursor-pointer"
+              className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center text-white bg-white/5 hover:bg-white/10 hover:border-[#e0e0e0]/40 transition duration-300 cursor-pointer"
               aria-label="Next Project"
             >
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -105,7 +105,7 @@ export const WorkHorizontal: React.FC = () => {
                   setCurrentIndex(idx);
                 }}
                 className={`h-1.5 rounded-full transition-all duration-300 cursor-pointer ${
-                  idx === currentIndex ? "w-6 bg-[#c697ff]" : "w-1.5 bg-white/20 hover:bg-white/40"
+                  idx === currentIndex ? "w-6 bg-[#e0e0e0]" : "w-1.5 bg-white/20 hover:bg-white/40"
                 }`}
                 aria-label={`Go to slide ${idx + 1}`}
               />
@@ -131,7 +131,7 @@ export const WorkHorizontal: React.FC = () => {
                   <span className="text-6xl md:text-8xl font-bold font-anton leading-none text-white/10 select-none">{num}</span>
                   <div className="text-right flex flex-col items-end">
                     <h4 className="text-2xl md:text-3.5xl font-bold text-white tracking-wide">{currentProject.title}</h4>
-                    <span className="text-xs md:text-sm uppercase tracking-widest text-[#c697ff] mt-1 font-semibold">{currentProject.category}</span>
+                    <span className="text-xs md:text-sm uppercase tracking-widest text-[#e0e0e0] mt-1 font-semibold">{currentProject.category}</span>
                   </div>
                 </div>
 

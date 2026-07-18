@@ -48,7 +48,7 @@ const techData = [
   // Row 5 (3 items)
   { name: "Git", icon: SiGit, color: "#F05032" },
   { name: "Next.js", icon: SiNextdotjs, color: "#ffffff" },
-  { name: "REST API", icon: TbApi, color: "#c697ff" },
+  { name: "REST API", icon: TbApi, color: "#e0e0e0" },
 ];
 
 export default function TechStack() {

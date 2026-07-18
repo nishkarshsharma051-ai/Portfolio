@@ -108,14 +108,14 @@ h2 {
 
 /* Specific Button Styles */
 #drawBtn {
-    background: linear-gradient(145deg, #6441a5, #2a0845);
+    background: linear-gradient(145deg, #666666, #222222);
     color: #fff;
     font-weight: 700;
     border-color: rgba(255, 255, 255, 0.2);
 }
 #drawBtn:hover, #drawBtn.active {
-    background: linear-gradient(145deg, #302b63, #0f0c29);
-    box-shadow: 0 0 15px rgba(83, 4, 209, 0.4);
+    background: linear-gradient(145deg, #444444, #111111);
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
 }
 #drawBtn.active {
     background: #fff;

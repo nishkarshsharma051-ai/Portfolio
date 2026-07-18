@@ -3,10 +3,10 @@ import { motion } from "framer-motion";
 import { config } from "./config";
 
 const stats = [
-  { value: "04+", label: "Years Exploring Code", color: "#c697ff" },
+  { value: "04+", label: "Years Exploring Code", color: "#e0e0e0" },
   { value: "10+", label: "Advanced Toolsets", color: "#e0e0e0" },
-  { value: "07+", label: "AI & Full-Stack Apps", color: "#a78bfa" },
-  { value: "100%", label: "Passion for Tech", color: "#ddd6fe" }
+  { value: "07+", label: "AI & Full-Stack Apps", color: "#cccccc" },
+  { value: "100%", label: "Passion for Tech", color: "#f0f0f0" }
 ];
 
 export const About: React.FC = () => {
@@ -26,13 +26,13 @@ export const About: React.FC = () => {
             transition={{ duration: 0.8 }}
             className="w-full lg:w-[35%] flex flex-col items-start gap-4"
           >
-            <p className="font-roboto text-sm md:text-base text-[#c697ff] uppercase tracking-[0.2em] font-semibold">Get to know me</p>
+            <p className="font-roboto text-sm md:text-base text-[#e0e0e0] uppercase tracking-[0.2em] font-semibold">Get to know me</p>
             <h2 className="font-anton text-6xl md:text-8xl font-normal leading-none tracking-wider text-white uppercase m-0">
               ABOUT
               <br />
-              <span className="text-[#c697ff]">ME</span>
+              <span className="text-[#e0e0e0]">ME</span>
             </h2>
-            <div className="w-16 h-1 bg-[#c697ff] rounded-full mt-2" />
+            <div className="w-16 h-1 bg-[#e0e0e0] rounded-full mt-2" />
           </motion.div>
 
           {/* Right Column: Premium Biography (Borderless) & Stats Grid (Borderless) */}
